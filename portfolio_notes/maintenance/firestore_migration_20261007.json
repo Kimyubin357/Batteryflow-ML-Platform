@@ -1,0 +1,34 @@
+{
+  "migration": {
+    "targetProject": "ls-battery-project",
+    "sourceProject": "ls-proejct-team1",
+    "documents": 7843,
+    "create": 7843,
+    "unchanged": 0,
+    "conflicts": [],
+    "mode": "apply",
+    "verified": true,
+    "matching": 7843,
+    "different": [],
+    "expectedDigest": "1d7ac0733ea51451440049d90309db122bac7e7f959e6e0740616b0df7252700",
+    "actualDigest": "1d7ac0733ea51451440049d90309db122bac7e7f959e6e0740616b0df7252700"
+  },
+  "app": {
+    "project": "ls-battery-project",
+    "source": "firestore",
+    "state": "ready",
+    "documents": 275,
+    "packs": 102,
+    "sample_cells": 176,
+    "endpoints": {
+      "/api/overview": 200,
+      "/api/demand": 200,
+      "/api/maintenance": 200,
+      "/api/battery-packs": 200,
+      "/api/battery-packs/1000_chg": 200
+    },
+    "visitor_auth": "local",
+    "staff_records": "blocked",
+    "copilot_remaining": 5
+  }
+}

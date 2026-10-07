@@ -1,0 +1,98 @@
+{
+  "checked_at": "2026-10-06",
+  "data_version": "2026-09-27.v4",
+  "forecast_rows": 107,
+  "precision_rule": "API gap rounded to 2 decimals; absolute descending, numeric Part ascending",
+  "raw_top_seven": [
+    {
+      "part": "Part 92",
+      "forecast": 642.2857142857143,
+      "plan": 102.0,
+      "gap": 540.2857142857143
+    },
+    {
+      "part": "Part 60",
+      "forecast": 476.1428571428572,
+      "plan": 761.0,
+      "gap": -284.8571428571428
+    },
+    {
+      "part": "Part 66",
+      "forecast": 476.1428571428572,
+      "plan": 761.0,
+      "gap": -284.8571428571428
+    },
+    {
+      "part": "Part 95",
+      "forecast": 261.1428571428572,
+      "plan": 44.0,
+      "gap": 217.14285714285722
+    },
+    {
+      "part": "Part 63",
+      "forecast": 257.85714285714283,
+      "plan": 57.0,
+      "gap": 200.85714285714283
+    },
+    {
+      "part": "Part 69",
+      "forecast": 257.85714285714283,
+      "plan": 57.0,
+      "gap": 200.85714285714283
+    },
+    {
+      "part": "Part 106",
+      "forecast": 496.7142857142857,
+      "plan": 335.0,
+      "gap": 161.71428571428572
+    }
+  ],
+  "exact_raw_ties_with_part60": [
+    "Part 60",
+    "Part 66"
+  ],
+  "display_ties_with_part60": [
+    "Part 60",
+    "Part 66"
+  ],
+  "api_ranked_results": [
+    {
+      "part": "Part 92",
+      "forecast": 642.29,
+      "plan": 102.0,
+      "actual": 124.0,
+      "gap": 540.29,
+      "gapPct": 529.7,
+      "review": true,
+      "direction": "상향 검토",
+      "date": "2021-11-01",
+      "model": "7-day Moving Average"
+    },
+    {
+      "part": "Part 60",
+      "forecast": 476.14,
+      "plan": 761.0,
+      "actual": 938.0,
+      "gap": -284.86,
+      "gapPct": -37.4,
+      "review": true,
+      "direction": "하향 검토",
+      "date": "2021-11-01",
+      "model": "7-day Moving Average"
+    },
+    {
+      "part": "Part 66",
+      "forecast": 476.14,
+      "plan": 761.0,
+      "actual": 938.0,
+      "gap": -284.86,
+      "gapPct": -37.4,
+      "review": true,
+      "direction": "하향 검토",
+      "date": "2021-11-01",
+      "model": "7-day Moving Average"
+    }
+  ],
+  "server_answer": "2021-11-01 · 7-day Moving Average 기준, 계획과 예측 차이의 절댓값이 큰 순서입니다. 차이는 소수 둘째 자리 기준이며, 동률은 부품 번호가 작은 순서입니다.\n1. Part 92: 예측 642.29개 / 계획 102.00개 / 차이 +540.29개 (상향 검토)\n2. Part 60: 예측 476.14개 / 계획 761.00개 / 차이 -284.86개 (하향 검토)\n3. Part 66: 예측 476.14개 / 계획 761.00개 / 차이 -284.86개 (하향 검토)\n자동 발주 지시가 아닌 검토 대상입니다.",
+  "source": "official local seed; no remote read and no Gemini call"
+}

@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>포트폴리오 둘러보기 · BatteryFlow AI</title><link rel="icon" href="data:,"><link rel="stylesheet" href="/auth/theme.css"></head>
+<body class="login-page"><div class="login-atmosphere" aria-hidden="true"><span class="login-glow login-glow-blue"></span><span class="login-glow login-glow-teal"></span><span class="login-glow login-glow-red"></span><img class="login-battery" src="/auth/login-battery.png" alt="" decoding="async" fetchpriority="low"></div><main class="login-workspace">
+<section class="login-context"><div class="login-brand"><img src="/auth/ci_img02.png" alt="LS"><span>BatteryFlow AI 운영센터</span></div><p class="eyebrow">PERSONAL PORTFOLIO</p><h1>데이터에서 판단까지,<br>직접 살펴보세요.</h1><p>통합 현황 · 공급망 예측 · 예지보전 · 품질 보증</p><div class="login-domains"><div><b>01</b><span>계획과 예측의 차이, 분석 근거 탐색</span></div><div><b>02</b><span>CSV 입력으로 발주량 재예측</span></div><div><b>03</b><span>AI Copilot에 질문하고 출처 확인</span></div></div></section>
+<section class="login-panel"><p class="eyebrow">BATTERYFLOW AI PORTFOLIO</p><h2>포트폴리오 둘러보기</h2><p>회원가입 없이 분석 화면과 AI Copilot을 살펴보세요.</p><form id="portfolio-form"><p id="login-error" role="alert"></p><button id="portfolio-start" type="submit">포트폴리오 둘러보기</button></form><div class="login-help">Copilot의 남은 질문 횟수는 대화창에서 확인할 수 있습니다.<br>공개용 분석 자료를 사용하며 실제 업무 기록은 변경하지 않습니다.<br>질문과 검색 근거는 Gemini로 전송되고, 대화는 이 브라우저에서 24시간 동안 조회할 수 있습니다. 개인정보는 입력하지 마세요.</div></section>
+</main><script>
+document.getElementById('portfolio-form').addEventListener('submit',async event=>{
+ event.preventDefault(); const button=document.getElementById('portfolio-start'); button.disabled=true;
+ try { const csrf=document.cookie.split('; ').find(x=>x.startsWith('manufacturing_csrf='))?.split('=').slice(1).join('=');
+ const response=await fetch('/auth/portfolio',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':csrf||''}});
+ const result=await response.json(); if(!response.ok) throw new Error(result.detail || '포트폴리오를 열지 못했습니다.'); location.replace('/');
+ }catch(error){document.getElementById('login-error').textContent=error.message;button.disabled=false;}
+});
+</script></body></html>

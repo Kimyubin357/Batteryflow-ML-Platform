@@ -1,0 +1,173 @@
+{
+  "checked_at": "2026-10-06",
+  "input": "발주량 예측 모델/outputs/audited_v2/source_total/cv_predictions.csv",
+  "input_sha256": "85b64ae20307305433a1786ff4c67317fe5ca35a12ad0c6dd9e52ff0620504f6",
+  "script_sha256": "0f8f6c0c50499a01a7ff3274c23ada4bc5121bd7fb7f4798f6fa80f01d0abc70",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "2.3.3"
+  },
+  "method": "paired target-day cluster percentile bootstrap; pooled MAE",
+  "seed": 42,
+  "repetitions": 20000,
+  "ci_level": 0.95,
+  "quantile_method": "linear",
+  "all_folds": {
+    "rows": 1289,
+    "target_days": 12,
+    "mae_ma7": 34.660423362518,
+    "mae_plan": 54.75640031031808,
+    "mae_reduction_units": 20.095976947800075,
+    "relative_mae_reduction_pct": 36.70069039219379
+  },
+  "ci95_relative_mae_reduction_pct": [
+    -13.590954274574088,
+    59.22377097144252
+  ],
+  "ci95_mae_reduction_units": [
+    -4.566763755199648,
+    44.424888618482264
+  ],
+  "by_fold": {
+    "fold_1": {
+      "rows": 442,
+      "target_days": 4,
+      "mae_ma7": 30.368455074337422,
+      "mae_plan": 98.9366515837104,
+      "mae_reduction_units": 68.56819650937298,
+      "relative_mae_reduction_pct": 69.30515174283755
+    },
+    "fold_2": {
+      "rows": 431,
+      "target_days": 4,
+      "mae_ma7": 46.05469008949287,
+      "mae_plan": 47.23665893271462,
+      "mae_reduction_units": 1.1819688432217461,
+      "relative_mae_reduction_pct": 2.502227866931439
+    },
+    "fold_3": {
+      "rows": 416,
+      "target_days": 4,
+      "mae_ma7": 27.415521978021978,
+      "mae_plan": 15.60576923076923,
+      "mae_reduction_units": -11.809752747252748,
+      "relative_mae_reduction_pct": -75.67555672916117
+    }
+  },
+  "leave_one_fold_out": {
+    "fold_1": {
+      "rows": 847,
+      "target_days": 8,
+      "mae_ma7": 36.90015179625569,
+      "mae_plan": 31.7012987012987,
+      "mae_reduction_units": -5.198853094956991,
+      "relative_mae_reduction_pct": -16.399495629319482
+    },
+    "fold_2": {
+      "rows": 858,
+      "target_days": 8,
+      "mae_ma7": 28.936729936729932,
+      "mae_plan": 58.53379953379953,
+      "mae_reduction_units": 29.5970695970696,
+      "relative_mae_reduction_pct": 50.564066971219226
+    },
+    "fold_3": {
+      "rows": 873,
+      "target_days": 8,
+      "mae_ma7": 38.112747504500085,
+      "mae_plan": 73.41237113402062,
+      "mae_reduction_units": 35.29962362952053,
+      "relative_mae_reduction_pct": 48.08402600847481
+    }
+  },
+  "parts_absent_from_cv": [
+    {
+      "part": "Part 45",
+      "observed_rows": 21,
+      "first_observation": "2021-09-13",
+      "last_observation": "2021-11-01",
+      "observed_dates": [
+        "2021-09-13",
+        "2021-09-14",
+        "2021-09-15",
+        "2021-09-16",
+        "2021-09-17",
+        "2021-09-18",
+        "2021-09-19",
+        "2021-09-20",
+        "2021-09-21",
+        "2021-09-22",
+        "2021-09-23",
+        "2021-09-24",
+        "2021-09-25",
+        "2021-09-26",
+        "2021-09-27",
+        "2021-10-26",
+        "2021-10-27",
+        "2021-10-28",
+        "2021-10-29",
+        "2021-10-30",
+        "2021-11-01"
+      ],
+      "cv_target_observations": 0
+    },
+    {
+      "part": "Part 109",
+      "observed_rows": 15,
+      "first_observation": "2021-09-13",
+      "last_observation": "2021-09-27",
+      "observed_dates": [
+        "2021-09-13",
+        "2021-09-14",
+        "2021-09-15",
+        "2021-09-16",
+        "2021-09-17",
+        "2021-09-18",
+        "2021-09-19",
+        "2021-09-20",
+        "2021-09-21",
+        "2021-09-22",
+        "2021-09-23",
+        "2021-09-24",
+        "2021-09-25",
+        "2021-09-26",
+        "2021-09-27"
+      ],
+      "cv_target_observations": 0
+    },
+    {
+      "part": "Part 111",
+      "observed_rows": 23,
+      "first_observation": "2021-09-16",
+      "last_observation": "2021-10-08",
+      "observed_dates": [
+        "2021-09-16",
+        "2021-09-17",
+        "2021-09-18",
+        "2021-09-19",
+        "2021-09-20",
+        "2021-09-21",
+        "2021-09-22",
+        "2021-09-23",
+        "2021-09-24",
+        "2021-09-25",
+        "2021-09-26",
+        "2021-09-27",
+        "2021-09-28",
+        "2021-09-29",
+        "2021-09-30",
+        "2021-10-01",
+        "2021-10-02",
+        "2021-10-03",
+        "2021-10-04",
+        "2021-10-05",
+        "2021-10-06",
+        "2021-10-07",
+        "2021-10-08"
+      ],
+      "cv_target_observations": 0
+    }
+  ],
+  "scope": "Post-hoc uncertainty of saved, CV-selected forecasts. Twelve resampled days; does not adjust for serial dependence across days or model-selection optimism. Leave-one-fold-out is a sensitivity check without refitting.",
+  "training_performed": false
+}
