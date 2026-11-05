@@ -1,0 +1,10 @@
+{
+  "overall_method": "XGBoost",
+  "ml_model": "XGBoost",
+  "overall_cv_mae": 15.940665909250844,
+  "ml_cv_mae": 15.940665909250844,
+  "selection_basis": "nested_purged_walk_forward_global_policy",
+  "final_holdout_is_selection_independent": false,
+  "evaluation_label": "retrospective_previously_observed_period",
+  "new_unseen_validation_available": false
+}

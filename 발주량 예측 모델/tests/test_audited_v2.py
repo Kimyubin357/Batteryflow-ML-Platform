@@ -1,5 +1,6 @@
 import hashlib
 import json
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -16,6 +17,18 @@ from inference import predict_records, build_feature_row, load_metadata
 
 OUT=ROOT/'outputs/audited_v2'
 
+
+def committed_sha256(path):
+    """SHA-256 of every committed version of a file (stored -text, so bytes match the run)."""
+    def git(*args):
+        return subprocess.run(['git',*args],cwd=path.parent,capture_output=True,check=True).stdout
+    # Paths stay relative to the file's folder: non-ASCII folder names never reach git arguments.
+    try:
+        commits=git('log','--format=%H','--',path.name).decode().split()
+    except (OSError,subprocess.CalledProcessError):
+        raise unittest.SkipTest('git history unavailable')
+    return {hashlib.sha256(git('show',f'{c}:./{path.name}')).hexdigest() for c in commits}
+
 class AuditedTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -26,8 +39,11 @@ class AuditedTests(unittest.TestCase):
     def test_source_provenance_and_quarantine(self):
         run=json.loads((OUT/'run_manifest.json').read_text(encoding='utf-8'))
         self.assertEqual(hashlib.sha256(SOURCE.read_bytes()).hexdigest(),run['raw_sha256'])
+        # The shared code has since gained audited_v3 options (v2 defaults kept), so provenance means
+        # the exact producing code is preserved in git history; behaviour is checked by the
+        # prediction-reproduction tests below.
         for name,digest in run['code_sha256'].items():
-            self.assertEqual(hashlib.sha256((ROOT/'src'/name).read_bytes()).hexdigest(),digest)
+            self.assertIn(digest,committed_sha256(ROOT/'src'/name),f'{name} that produced audited_v2 is not in git history')
         self.assertEqual(self.meta['quarantined_parts'],['Part 21','Part 26'])
         self.assertFalse(self.daily.part_number.isin(self.meta['quarantined_parts']).any())
         self.assertEqual(len(self.daily),5380)

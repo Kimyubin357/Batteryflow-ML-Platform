@@ -1,0 +1,227 @@
+{
+  "reference": "D+3 Plan Reference",
+  "unit": "daily mean absolute error difference (negative = better than plan)",
+  "resampling": "target-date bootstrap, 4000 resamples, seed 42",
+  "cv": {
+    "Last Value": {
+      "mean_daily_mae_minus_plan": 27.634733724219704,
+      "bootstrap95": [
+        11.7572,
+        46.6048
+      ],
+      "days_better_than_plan": 0,
+      "target_days": 7
+    },
+    "3-day Moving Average": {
+      "mean_daily_mae_minus_plan": 20.24803650399445,
+      "bootstrap95": [
+        9.8945,
+        32.3429
+      ],
+      "days_better_than_plan": 0,
+      "target_days": 7
+    },
+    "7-day Moving Average": {
+      "mean_daily_mae_minus_plan": 14.620458805213477,
+      "bootstrap95": [
+        6.8773,
+        25.8723
+      ],
+      "days_better_than_plan": 0,
+      "target_days": 7
+    },
+    "XGBoost": {
+      "mean_daily_mae_minus_plan": -0.29572799210287376,
+      "bootstrap95": [
+        -2.4025,
+        2.3515
+      ],
+      "days_better_than_plan": 5,
+      "target_days": 7
+    },
+    "LightGBM": {
+      "mean_daily_mae_minus_plan": 1.4633330631040258,
+      "bootstrap95": [
+        -1.4069,
+        5.214
+      ],
+      "days_better_than_plan": 3,
+      "target_days": 7
+    },
+    "CatBoost": {
+      "mean_daily_mae_minus_plan": 2.3727168219311445,
+      "bootstrap95": [
+        -1.0223,
+        6.071
+      ],
+      "days_better_than_plan": 3,
+      "target_days": 7
+    },
+    "LSTM": {
+      "mean_daily_mae_minus_plan": 6.601904307339667,
+      "bootstrap95": [
+        3.8359,
+        10.5689
+      ],
+      "days_better_than_plan": 0,
+      "target_days": 7
+    },
+    "Related LightGBM": {
+      "mean_daily_mae_minus_plan": 1.5201810132909055,
+      "bootstrap95": [
+        -0.9986,
+        4.0691
+      ],
+      "days_better_than_plan": 3,
+      "target_days": 7
+    }
+  },
+  "retrospective": {
+    "Last Value": {
+      "mean_daily_mae_minus_plan": 9.680619504474793,
+      "bootstrap95": [
+        4.3632,
+        14.0823
+      ],
+      "days_better_than_plan": 1,
+      "target_days": 6
+    },
+    "3-day Moving Average": {
+      "mean_daily_mae_minus_plan": 10.686576958578515,
+      "bootstrap95": [
+        5.5887,
+        15.7495
+      ],
+      "days_better_than_plan": 0,
+      "target_days": 6
+    },
+    "7-day Moving Average": {
+      "mean_daily_mae_minus_plan": 11.116551213922833,
+      "bootstrap95": [
+        6.1943,
+        17.1357
+      ],
+      "days_better_than_plan": 0,
+      "target_days": 6
+    },
+    "XGBoost": {
+      "mean_daily_mae_minus_plan": -2.0687411000077556,
+      "bootstrap95": [
+        -5.0348,
+        0.9934
+      ],
+      "days_better_than_plan": 4,
+      "target_days": 6
+    },
+    "LightGBM": {
+      "mean_daily_mae_minus_plan": -1.7581411575148733,
+      "bootstrap95": [
+        -3.8963,
+        0.2156
+      ],
+      "days_better_than_plan": 4,
+      "target_days": 6
+    },
+    "CatBoost": {
+      "mean_daily_mae_minus_plan": -1.263246757376629,
+      "bootstrap95": [
+        -5.424,
+        2.2978
+      ],
+      "days_better_than_plan": 3,
+      "target_days": 6
+    },
+    "LSTM": {
+      "mean_daily_mae_minus_plan": -1.9221639447764396,
+      "bootstrap95": [
+        -4.8893,
+        1.2559
+      ],
+      "days_better_than_plan": 3,
+      "target_days": 6
+    },
+    "Related LightGBM": {
+      "mean_daily_mae_minus_plan": -0.9010618583254821,
+      "bootstrap95": [
+        -3.3726,
+        1.3111
+      ],
+      "days_better_than_plan": 3,
+      "target_days": 6
+    }
+  },
+  "all_test_dates": {
+    "Last Value": {
+      "mean_daily_mae_minus_plan": 19.348219468952827,
+      "bootstrap95": [
+        9.2383,
+        30.597
+      ],
+      "days_better_than_plan": 1,
+      "target_days": 13
+    },
+    "3-day Moving Average": {
+      "mean_daily_mae_minus_plan": 15.835055175340939,
+      "bootstrap95": [
+        9.5204,
+        23.5212
+      ],
+      "days_better_than_plan": 0,
+      "target_days": 13
+    },
+    "7-day Moving Average": {
+      "mean_daily_mae_minus_plan": 13.003270686156258,
+      "bootstrap95": [
+        8.0617,
+        19.8287
+      ],
+      "days_better_than_plan": 0,
+      "target_days": 13
+    },
+    "XGBoost": {
+      "mean_daily_mae_minus_plan": -1.1140417342128193,
+      "bootstrap95": [
+        -3.0694,
+        1.0209
+      ],
+      "days_better_than_plan": 9,
+      "target_days": 13
+    },
+    "LightGBM": {
+      "mean_daily_mae_minus_plan": -0.02350119256623528,
+      "bootstrap95": [
+        -2.0234,
+        2.5069
+      ],
+      "days_better_than_plan": 7,
+      "target_days": 13
+    },
+    "CatBoost": {
+      "mean_daily_mae_minus_plan": 0.6945797853275567,
+      "bootstrap95": [
+        -2.1174,
+        3.6079
+      ],
+      "days_better_than_plan": 6,
+      "target_days": 13
+    },
+    "LSTM": {
+      "mean_daily_mae_minus_plan": 2.667718960209157,
+      "bootstrap95": [
+        -0.5371,
+        6.1113
+      ],
+      "days_better_than_plan": 3,
+      "target_days": 13
+    },
+    "Related LightGBM": {
+      "mean_daily_mae_minus_plan": 0.4026843033141113,
+      "bootstrap95": [
+        -1.4418,
+        2.382
+      ],
+      "days_better_than_plan": 6,
+      "target_days": 13
+    }
+  }
+}

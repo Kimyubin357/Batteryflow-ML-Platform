@@ -1,0 +1,113 @@
+{
+  "fold_1": {
+    "XGBoost": {
+      "config": {
+        "features": "basic",
+        "size": "small"
+      },
+      "iterations": 305
+    },
+    "LightGBM": {
+      "config": {
+        "features": "basic",
+        "size": "small"
+      },
+      "iterations": 96
+    },
+    "CatBoost": {
+      "config": {
+        "features": "basic",
+        "size": "small"
+      },
+      "iterations": 111
+    },
+    "LSTM": {
+      "config": {
+        "features": "basic",
+        "size": "small"
+      },
+      "iterations": 12
+    },
+    "Related LightGBM": {
+      "config": {
+        "features": "enhanced",
+        "size": "medium"
+      },
+      "iterations": 87
+    }
+  },
+  "fold_2": {
+    "XGBoost": {
+      "config": {
+        "features": "enhanced",
+        "size": "small"
+      },
+      "iterations": 495
+    },
+    "LightGBM": {
+      "config": {
+        "features": "enhanced",
+        "size": "small"
+      },
+      "iterations": 240
+    },
+    "CatBoost": {
+      "config": {
+        "features": "enhanced",
+        "size": "small"
+      },
+      "iterations": 359
+    },
+    "LSTM": {
+      "config": {
+        "features": "enhanced",
+        "size": "medium"
+      },
+      "iterations": 18
+    },
+    "Related LightGBM": {
+      "config": {
+        "features": "enhanced",
+        "size": "small"
+      },
+      "iterations": 190
+    }
+  },
+  "retrospective": {
+    "XGBoost": {
+      "config": {
+        "features": "basic",
+        "size": "small"
+      },
+      "iterations": 429
+    },
+    "LightGBM": {
+      "config": {
+        "features": "basic",
+        "size": "medium"
+      },
+      "iterations": 105
+    },
+    "CatBoost": {
+      "config": {
+        "features": "enhanced",
+        "size": "medium"
+      },
+      "iterations": 204
+    },
+    "LSTM": {
+      "config": {
+        "features": "basic",
+        "size": "small"
+      },
+      "iterations": 61
+    },
+    "Related LightGBM": {
+      "config": {
+        "features": "enhanced",
+        "size": "medium"
+      },
+      "iterations": 115
+    }
+  }
+}

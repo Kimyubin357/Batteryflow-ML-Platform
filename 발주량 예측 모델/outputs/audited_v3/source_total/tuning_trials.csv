@@ -1,0 +1,49 @@
+split,model,features,size,validation_mae,iterations
+fold_1,XGBoost,basic,small,19.271647040619445,305
+fold_1,XGBoost,basic,medium,19.615381410303673,373
+fold_1,XGBoost,enhanced,small,20.138958364324186,293
+fold_1,XGBoost,enhanced,medium,20.510975765273177,386
+fold_1,LightGBM,basic,small,16.785111175612585,96
+fold_1,LightGBM,basic,medium,17.362946954340128,84
+fold_1,LightGBM,enhanced,small,17.382691057007207,98
+fold_1,LightGBM,enhanced,medium,17.35900866330467,89
+fold_1,CatBoost,basic,small,18.40566518109642,111
+fold_1,CatBoost,basic,medium,18.791280364815346,105
+fold_1,CatBoost,enhanced,small,18.750013118752992,122
+fold_1,CatBoost,enhanced,medium,18.50829859232504,175
+fold_1,LSTM,basic,small,26.377992194894524,12
+fold_1,LSTM,enhanced,medium,52.33096853941011,24
+fold_1,Related LightGBM,enhanced,small,21.6148545176049,93
+fold_1,Related LightGBM,enhanced,medium,21.245509909488597,87
+fold_2,XGBoost,basic,small,19.360182592117326,366
+fold_2,XGBoost,basic,medium,20.165596706796936,349
+fold_2,XGBoost,enhanced,small,17.890908321961252,495
+fold_2,XGBoost,enhanced,medium,18.456887969861224,472
+fold_2,LightGBM,basic,small,19.553431651847227,160
+fold_2,LightGBM,basic,medium,20.6393798013775,149
+fold_2,LightGBM,enhanced,small,18.171045804927626,240
+fold_2,LightGBM,enhanced,medium,18.885502028243863,183
+fold_2,CatBoost,basic,small,21.373116413551337,229
+fold_2,CatBoost,basic,medium,22.877311979844503,164
+fold_2,CatBoost,enhanced,small,18.30188888226932,359
+fold_2,CatBoost,enhanced,medium,20.717928033726245,285
+fold_2,LSTM,basic,small,21.63259081643438,55
+fold_2,LSTM,enhanced,medium,20.185864291257328,18
+fold_2,Related LightGBM,enhanced,small,19.12238027604166,190
+fold_2,Related LightGBM,enhanced,medium,19.342058200969944,498
+retrospective,XGBoost,basic,small,11.421970658863966,429
+retrospective,XGBoost,basic,medium,11.782792988018347,471
+retrospective,XGBoost,enhanced,small,12.510427677574066,402
+retrospective,XGBoost,enhanced,medium,12.281612879954851,409
+retrospective,LightGBM,basic,small,12.64034835115135,121
+retrospective,LightGBM,basic,medium,12.30551211693707,105
+retrospective,LightGBM,enhanced,small,12.816797015549582,126
+retrospective,LightGBM,enhanced,medium,13.116853076102972,117
+retrospective,CatBoost,basic,small,13.53103849214574,181
+retrospective,CatBoost,basic,medium,11.855406016340911,298
+retrospective,CatBoost,enhanced,small,12.804381170298287,196
+retrospective,CatBoost,enhanced,medium,11.546875292766767,204
+retrospective,LSTM,basic,small,13.653994926430292,61
+retrospective,LSTM,enhanced,medium,14.452070514134203,43
+retrospective,Related LightGBM,enhanced,small,12.49044464636781,135
+retrospective,Related LightGBM,enhanced,medium,11.959133475461865,115

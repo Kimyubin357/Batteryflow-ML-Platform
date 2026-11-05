@@ -1,0 +1,52 @@
+{
+  "version": "audited_v3",
+  "created_at": "2026-11-05T01:41:32.319817+00:00",
+  "seed": 42,
+  "stability_seeds": [
+    42,
+    137,
+    2026
+  ],
+  "quantity": "source_total",
+  "conflicts": "quarantine all parts with conflicting same-time snapshots",
+  "target": "calendar D+3 final ERP daily order plan",
+  "input_availability": "end-of-day final snapshot only",
+  "selection": "three purged outer folds of four dates; five-date inner validation; refit on labels strictly before outer origin",
+  "baselines": [
+    "Last Value",
+    "3-day Moving Average",
+    "7-day Moving Average",
+    "D+3 Plan Reference"
+  ],
+  "families": [
+    "XGBoost",
+    "LightGBM",
+    "CatBoost",
+    "LSTM",
+    "Related LightGBM"
+  ],
+  "ranking": [
+    "pooled_MAE",
+    "RMSE"
+  ],
+  "holdout": "last seven target dates, retrospective and previously observed, not new independent evidence",
+  "feature_comparison": [
+    "basic",
+    "enhanced"
+  ],
+  "tree_sizes": [
+    "small",
+    "medium"
+  ],
+  "related_candidates": "train-only positive Pearson, >=7 shared days, top3; candidate not verified BOM",
+  "carryover": "realign",
+  "split_sizes": {
+    "holdout_days": 6,
+    "cv_days": 7,
+    "folds": 2,
+    "validation_days": 4,
+    "min_train_days": 5
+  },
+  "cold_start": "Last Value fallback, counted in all comparisons",
+  "calibration": "CV residuals only; never optimize using retrospective labels"
+}

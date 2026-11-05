@@ -17,13 +17,18 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from xgboost import XGBRegressor
-import torch
-from torch import nn
-from torch.utils.data import TensorDataset, DataLoader
+try:
+    import torch
+    from torch import nn
+    from torch.utils.data import TensorDataset, DataLoader
+except (ImportError, OSError) as error:  # e.g. torch DLLs blocked by OS policy; only --skip-lstm can run.
+    torch = nn = None; TORCH_ERROR = error
 from demand_contract import *
 
 OUT=ROOT/'outputs/audited_v2'
 MODELS=ROOT/'models/audited_v2'
+CARRYOVER='keep'
+SPLIT={}  # evaluation_plan sizes; empty = audited_v2 design
 SEEDS=[42,137,2026]
 REL_FEATURES=[f'rel{i}_{c}' for i in range(3) for c in ['actual_d','plan_d3','available']]
 
@@ -86,7 +91,7 @@ def tree_model(family,config,seed,iterations=500,early=False):
         allow_writing_files=False,verbose=False)
 
 
-class DemandNet(nn.Module):
+class DemandNet(nn.Module if nn else object):
     def __init__(self,part_count,calendar_count,hidden):
         super().__init__();self.rnn=nn.LSTM(4,hidden,batch_first=True)
         self.embedding=nn.Embedding(part_count+1,8)
@@ -216,7 +221,7 @@ def metric_table(pred):
 
 
 def evaluate(daily,scenario,locked=None):
-    frame=build_samples(daily);plan=evaluation_plan(frame);folder=OUT/scenario;folder.mkdir(parents=True,exist_ok=True)
+    frame=build_samples(daily);plan=evaluation_plan(frame,**SPLIT);folder=OUT/scenario;folder.mkdir(parents=True,exist_ok=True)
     predictions=[];audit=[];tuning=[];decisions={};artifacts={}
     for label,masks in plan:
         if label=='retrospective':
@@ -286,7 +291,22 @@ def uncertainty(cv,retro,selection):
 
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--skip-sensitivity',action='store_true');args=parser.parse_args()
+    global OUT,MODELS,VERSION,CARRYOVER,ML_NAMES,MODEL_NAMES,SPLIT
+    parser=argparse.ArgumentParser();parser.add_argument('--skip-sensitivity',action='store_true')
+    for name in ['holdout_days','cv_days','folds','validation_days','min_train_days']:
+        parser.add_argument('--'+name.replace('_','-'),type=int,help='evaluation_plan size; default is the audited_v2 design')
+    parser.add_argument('--skip-lstm',action='store_true',help='compare all other methods when PyTorch cannot be loaded')
+    parser.add_argument('--version',default=VERSION,help='output/model folder name; a completed version is never overwritten')
+    parser.add_argument('--carryover',choices=['keep','realign'],default='keep',
+        help="'keep' reproduces audited_v2; 'realign' re-reads carried-over snapshots and drops their labels")
+    args=parser.parse_args()
+    VERSION,CARRYOVER=args.version,args.carryover
+    SPLIT={k:getattr(args,k) for k in ['holdout_days','cv_days','folds','validation_days','min_train_days'] if getattr(args,k) is not None}
+    OUT=ROOT/'outputs'/VERSION;MODELS=ROOT/'models'/VERSION
+    if args.skip_lstm:
+        ML_NAMES=[m for m in ML_NAMES if m!='LSTM'];MODEL_NAMES=BASELINES+ML_NAMES
+    elif torch is None:
+        raise SystemExit(f'PyTorch could not be loaded ({TORCH_ERROR}); rerun with --skip-lstm or fix the environment.')
     if (OUT/'run_manifest.json').exists():raise SystemExit('Completed run already exists; preserve this version and create a new version for another experiment.')
     OUT.mkdir(parents=True,exist_ok=True)
     plan_doc={'version':VERSION,'created_at':datetime.now(timezone.utc).isoformat(),'seed':42,'stability_seeds':SEEDS,
@@ -296,9 +316,9 @@ def main():
         'baselines':BASELINES,'families':ML_NAMES,'ranking':['pooled_MAE','RMSE'],
         'holdout':'last seven target dates, retrospective and previously observed, not new independent evidence',
         'feature_comparison':['basic','enhanced'],'tree_sizes':['small','medium'],'related_candidates':'train-only positive Pearson, >=7 shared days, top3; candidate not verified BOM',
-        'cold_start':'Last Value fallback, counted in all comparisons','calibration':'CV residuals only; never optimize using retrospective labels'}
+        'carryover':CARRYOVER,'split_sizes':SPLIT or 'audited_v2 default','cold_start':'Last Value fallback, counted in all comparisons','calibration':'CV residuals only; never optimize using retrospective labels'}
     dump(OUT/'training_plan_v2.json',plan_doc)
-    start=time.time();daily,quality,conflicts=load_daily()
+    start=time.time();daily,quality,conflicts=load_daily(carryover=CARRYOVER)
     conflicts.to_csv(OUT/'quarantined_source_rows.csv',index=False)
     daily.to_csv(OUT/'daily_history.csv',index=False)
     dump(OUT/'data_quality.json',quality)
@@ -307,7 +327,7 @@ def main():
     # Seed stability on the family choices already frozen for each outer fold.
     stability=[]
     for label,masks in plan[:-1]:
-        for family in sorted({selection['ml_model'],'LSTM'}):
+        for family in sorted({selection['ml_model'],'LSTM'}&set(ML_NAMES)):
             for seed in SEEDS[1:]:
                 print(f'stability {label} {family} seed={seed}',flush=True)
                 values,a,_,_=fit_family(frame,daily,masks,family,seed=seed,frozen=decisions[label][family])
@@ -315,14 +335,14 @@ def main():
     pd.DataFrame(stability).to_csv(OUT/'seed_stability.csv',index=False)
     sensitivity=[]
     for policy in ['first','last']:
-        alternate,q,_=load_daily(conflict_policy=policy);sf=build_samples(alternate)
+        alternate,q,_=load_daily(conflict_policy=policy,carryover=CARRYOVER);sf=build_samples(alternate)
         keys=cv[['part_number','origin_date','target_date']]
         # Shared non-conflicting cohort comparison plus explicitly separate disputed cohort.
         for label,g in [('common_cohort',keys.merge(sf,on=['part_number','origin_date','target_date'])),('disputed_parts',sf[sf.part_number.isin(quality['quarantined_parts'])])]:
             for m in BASELINES:sensitivity.append({'policy':policy,'cohort':label,'Model':m,'N':len(g),**metrics(g.target,g[m])})
     pd.DataFrame(sensitivity).to_csv(OUT/'conflict_policy_sensitivity.csv',index=False)
     if not args.skip_sensitivity:
-        sd,sq,_=load_daily('slot_sum');_,_,scv,sretro,ssel,_,_=evaluate(sd,'slot_sum',locked=decisions)
+        sd,sq,_=load_daily('slot_sum',carryover=CARRYOVER);_,_,scv,sretro,ssel,_,_=evaluate(sd,'slot_sum',locked=decisions)
         dump(OUT/'slot_sum_sensitivity.json',{'quantity':sq,'selection':ssel,'configurations':'source_total choices frozen; no second tuning',
             'purpose':'target-definition sensitivity only; never choose target definition by smaller error'})
     # Export the retrospective-fit model bundle. It has never trained on retrospective labels.
@@ -338,7 +358,7 @@ def main():
     code_files=[Path(__file__),ROOT/'src/demand_contract.py']
     manifest={'version':VERSION,'generated_at':datetime.now(timezone.utc).isoformat(),'elapsed_seconds':time.time()-start,
         'raw_sha256':hashlib.sha256(SOURCE.read_bytes()).hexdigest(),'code_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in code_files},
-        'python':platform.python_version(),'libraries':{'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__,'lightgbm':lgb.__version__},
+        'python':platform.python_version(),'libraries':{'numpy':np.__version__,'pandas':pd.__version__,'torch':torch.__version__ if torch else None,'lightgbm':lgb.__version__},
         'selection':selection,'training_complete':True,'firestore_uploaded':False}
     dump(OUT/'run_manifest.json',manifest)
     print(json.dumps(selection,ensure_ascii=False,indent=2),flush=True)
