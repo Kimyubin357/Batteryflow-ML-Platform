@@ -66,7 +66,9 @@ def realign_carryover(daily, raw, quantity_source='source_total', share=CARRYOVE
     for date in pd.date_range(dates[0], dates[-1]):
         if date in base_of:
             continue
-        last = max(x for x in base_of if x < date)
+        # Copy the last date that has logs; earlier filled dates have no rows of their own,
+        # so consecutive missing days all repeat the same observed snapshot.
+        last = max(x for x in dates if x < date)
         copy = rows[rows.date.eq(last)].copy()
         copy['date'] = date; copy['calendar_gap_filled'] = True
         filled.append(copy); base_of[date] = base_of[last]

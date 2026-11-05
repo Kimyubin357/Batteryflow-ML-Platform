@@ -437,7 +437,7 @@ def create_dashboard(meta):
             if not checked['valid']:
                 return html.Div([callout('입력 수정 필요','오류 항목을 수정한 뒤 다시 업로드하세요.','warning'),checks])
             result = request("/api/demand/infer", "POST", files={"file": (filename or "input.csv", payload, "text/csv")})
-            return html.Div([checks,badge("추론 완료", "success"), metric_rows([("D+3 목표일", result["target_date"], result["part_number"]), ("운영 예측", num(result["recommended_forecast"])+"개", result["recommended_model"]), ("학습형 보조", num(result["auxiliary_prediction"])+"개", result["auxiliary_model"] + " · 알려진 부품만 제공"), ("기존 계획", num(result["plan_d3_reference"])+"개", "공식 시드는 변경하지 않습니다.")]), html.P(result.get("fallback_reason") or result.get("input_warning") or result["evaluation_note"], className="section-note")])
+            return html.Div([checks,badge("추론 완료", "success"), metric_rows([("D+3 목표일", result["target_date"], result["part_number"]), ("운영 예측", num(result["recommended_forecast"])+"개", result["recommended_model"]), *([("학습형 보조", num(result["auxiliary_prediction"])+"개", result["auxiliary_model"] + " · 알려진 부품만 제공")] if result["auxiliary_model"]!="D+3 Plan Reference" else []), ("기존 계획", num(result["plan_d3_reference"])+"개", "공식 시드는 변경하지 않습니다.")]), html.P(result.get("fallback_reason") or result.get("input_warning") or result["evaluation_note"], className="section-note")])
         except (ValueError, httpx.HTTPError):
             return callout("CSV 추론 실패", "템플릿의 필수 열, 동일 부품의 연속 3일, 0 이상 수량을 확인하세요.", "warning")
 
