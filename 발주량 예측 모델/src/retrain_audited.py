@@ -3,7 +3,7 @@
 No cloud credentials or SDK imports. Run once after reviewing training_plan_v2.json.
 """
 from __future__ import annotations
-import argparse, hashlib, json, platform, random, subprocess, time
+import argparse, hashlib, inspect, json, platform, random, subprocess, time
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
@@ -36,6 +36,20 @@ REL_FEATURES=[f'rel{i}_{c}' for i in range(3) for c in ['actual_d','plan_d3','av
 def dump(path,obj):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(obj,ensure_ascii=False,indent=2,default=lambda v:v.item() if isinstance(v,np.generic) else str(v)),encoding='utf-8')
+
+
+def evaluation_plan_metadata(**split_sizes):
+    """Describe the configured split sizes, including evaluation_plan's defaults."""
+    bound=inspect.signature(evaluation_plan).bind(None,**split_sizes)
+    bound.apply_defaults()
+    sizes={key:value for key,value in bound.arguments.items() if key!='frame'}
+    return {
+        'selection':f"configured for {sizes['folds']} purged outer folds across {sizes['cv_days']} target dates "
+            f"(numpy.array_split); {sizes['validation_days']}-date inner validation; "
+            f"minimum {sizes['min_train_days']} training target dates; refit on labels strictly before outer origin",
+        'holdout':f"configured for last {sizes['holdout_days']} target dates; "
+            "retrospective and previously observed, not new independent evidence",
+        'split_sizes':sizes}
 
 
 def seed_all(seed):
@@ -312,11 +326,10 @@ def main():
     plan_doc={'version':VERSION,'created_at':datetime.now(timezone.utc).isoformat(),'seed':42,'stability_seeds':SEEDS,
         'quantity':'source_total','conflicts':'quarantine all parts with conflicting same-time snapshots',
         'target':'calendar D+3 final ERP daily order plan','input_availability':'end-of-day final snapshot only',
-        'selection':'three purged outer folds of four dates; five-date inner validation; refit on labels strictly before outer origin',
+        **evaluation_plan_metadata(**SPLIT),
         'baselines':BASELINES,'families':ML_NAMES,'ranking':['pooled_MAE','RMSE'],
-        'holdout':'last seven target dates, retrospective and previously observed, not new independent evidence',
         'feature_comparison':['basic','enhanced'],'tree_sizes':['small','medium'],'related_candidates':'train-only positive Pearson, >=7 shared days, top3; candidate not verified BOM',
-        'carryover':CARRYOVER,'split_sizes':SPLIT or 'audited_v2 default','cold_start':'Last Value fallback, counted in all comparisons','calibration':'CV residuals only; never optimize using retrospective labels'}
+        'carryover':CARRYOVER,'cold_start':'Last Value fallback, counted in all comparisons','calibration':'CV residuals only; never optimize using retrospective labels'}
     dump(OUT/'training_plan_v2.json',plan_doc)
     start=time.time();daily,quality,conflicts=load_daily(carryover=CARRYOVER)
     conflicts.to_csv(OUT/'quarantined_source_rows.csv',index=False)
