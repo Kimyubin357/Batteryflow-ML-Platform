@@ -21,4 +21,4 @@ CV는 2021-10-14~10-21의 유효 7일·111개 부품·743건이다. 회고는 20
 
 [run_manifest.json](run_manifest.json)의 `firestore_uploaded=false`도 **학습 완료 당시** 상태다. 이후 `2026-11-05.v5` 시드 275개 반영·검증과 구분하며 현재 배포 기록은 [Firestore 배포 상태](../../../firestore/DEPLOYMENT_STATUS.md)를 따른다. 학습 당시 manifest와 해시를 현재 배포 상태에 맞춰 덮어쓰지 않는다.
 
-현재 해석은 [발주 평가 근거](../../../docs/copilot/demand-validation.md), 입력 조건은 [CSV 계약](../../../docs/copilot/demand-contract.md)을 따른다. 두 문서의 교체는 로컬 완료이며, 이번 문서 정리에서 새 Cloud Run 배포를 실행한 것은 아니다.
+현재 해석은 [발주 평가 근거](../../../docs/copilot/demand-validation.md), 입력 조건은 [CSV 계약](../../../docs/copilot/demand-contract.md)을 따른다. 두 문서의 교체는 2026-11-05 Cloud Run 재배포로 라이브에 반영했다.
