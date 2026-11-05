@@ -9,9 +9,9 @@ KAMP 제조 데이터를 활용한 공급망·예지보전·품질 분석 플랫
 | 작성자 / 관심 직무 | 김유빈 · 데이터 분석 / 머신러닝 엔지니어 |
 | 팀 개발 기간 | 2026.09.21–09.30 · 이후 개인 포트폴리오로 개선 |
 | 서비스 목적 | 기존 발주 계획과 최근 패턴의 차이를 찾아 검토를 지원 |
-| 주요 기술 | Python · pandas · scikit-learn · XGBoost · PyTorch · FastAPI · Dash · Plotly · Gemini · FastEmbed / FAISS · Firebase |
+| 주요 기술 | Python · pandas · scikit-learn · XGBoost · PyTorch · FastAPI · Dash · Plotly · Gemini · FastEmbed / FAISS · Firebase · Google Cloud Run |
 
-[포트폴리오 핵심 내용](portfolio_notes/01_포트폴리오_핵심내용.md) · [실행 안내](GETTING_STARTED.md) · [모델 평가 보고서](<발주량 예측 모델/docs/RETRAINING_REPORT_2026-09-27.md>)
+[라이브 서비스 체험](https://kimyubin357.github.io/batteryflow-live.html) · [포트폴리오 핵심 내용](portfolio_notes/01_포트폴리오_핵심내용.md) · [로컬 실행 안내](GETTING_STARTED.md) · [모델 평가 보고서](<발주량 예측 모델/docs/RETRAINING_REPORT_2026-09-27.md>)
 
 ![공급망 예측 화면](portfolio_notes/assets/demand-dashboard.png)
 
@@ -46,13 +46,13 @@ LSTM은 3일 입력으로 학습형 후보 중 가장 낮은 MAE를 보였습니
 
 학습과 추론에서 `demand_contract.py`의 특징 생성 규칙을 공유합니다. 모델·전처리기·메타데이터와 원본/코드 해시를 함께 보존해 결과를 추적합니다.
 
-FastAPI에서 한 부품의 3~60일 이력을 받아 연속 날짜·중복·음수·무한대·필수 열을 검사하고, Dash의 **CSV 검사 → 예측 → 계획 비교 → 검토 기록** 흐름으로 연결했습니다.
+한 부품의 일별 관측 3~60건을 CSV로 입력하면 FastAPI가 필수 열, 날짜 중복, 최근 3일의 연속성, 수량의 유효성을 검사합니다. Dash 화면에서 예측값과 기존 D+3 계획을 나란히 비교할 수 있습니다. 직원은 별도의 발주 검토 화면에서 공식 분석 자료의 부품·목표일·모델별로 판단을 기록합니다.
 
 ### 3. Copilot의 수치와 순위 오류 해결
 
 “계획과 차이가 큰 부품 3개”를 물었을 때 LLM이 증가 부품 위주로 답하고 감소 부품을 누락했습니다. 키워드 확인만 하던 검사로는 실제 순위 오류를 잡지 못했습니다.
 
-공식 분석 자료의 수치 조회와 FastEmbed·FAISS 문서 검색을 분리하고, 순위와 핵심 수치 문장을 서버에서 확정하도록 바꿨습니다. **차이 절댓값 내림차순 → 동률이면 부품 번호 오름차순**을 API와 Copilot이 공유합니다.
+Copilot은 공식 분석 자료에서 수치를 조회하고, FastEmbed·FAISS로 관련 문서를 검색해 Gemini API에 답변 근거를 전달합니다. 순위와 핵심 수치 문장은 서버에서 확정합니다. **차이 절댓값 내림차순 → 동률이면 부품 번호 오름차순**을 API와 Copilot이 공유합니다.
 
 2021-11-01 기준 검증 결과는 **Part 92 → Part 60 → Part 66**, 차이는 **+540.29 / −284.86 / −284.86개**입니다. 입력 순서를 바꾸거나 상위 3개 경계에서 동률이 발생해도 규칙을 유지하는지 검사했습니다.
 
@@ -83,6 +83,10 @@ FastAPI에서 한 부품의 3~60일 이력을 받아 연속 날짜·중복·음�
 
 ## 실행해 보기
 
+팀 개발 이후 제가 분석 데이터를 개인 Firebase의 Firestore로 이전하고 FastAPI·Dash 서비스를 Google Cloud Run에 배포했습니다. [라이브 서비스 체험 안내](https://kimyubin357.github.io/batteryflow-live.html)에서 체험 계정을 확인한 뒤 [BatteryFlow 운영센터](https://batteryflow-u6lb5fm2vq-du.a.run.app/login)에 로그인할 수 있습니다.
+
+### 로컬에서 포트폴리오 둘러보기
+
 Python **3.12** 환경에서 다음 순서로 실행합니다. 학습을 다시 수행하지 않고 저장된 모델·분석 자료를 사용합니다.
 
 ```powershell
@@ -100,7 +104,7 @@ Copy-Item .env.example .env
 | `start_local.cmd` · 8078 | 본인 Firebase Authentication의 직원/관리자 로그인, 검토 기록·관리자 로그 |
 | `start_demo.cmd` · 8070 | 외부 서비스 연결 없는 화면·CSV 추론 확인 |
 
-개인 환경의 분석 데이터는 본인 소유 Firestore로 이전했습니다. GitHub 파일에 인증 키·계정 비밀번호·직원 로그·방문자 대화는 포함하지 않습니다. **공개 서비스 배포 주소는 아직 없습니다.**
+인증 키와 계정 비밀번호는 각 실행 환경에서 별도로 설정합니다. 직원 로그와 방문자 대화는 GitHub 공개 자료에서 제외했습니다.
 
 [Firebase·Copilot 설정 및 검증 명령](GETTING_STARTED.md) · [방문자 한도와 배포 조건](PORTFOLIO_RUN.md)
 
