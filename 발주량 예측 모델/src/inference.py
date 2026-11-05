@@ -32,6 +32,9 @@ def validate_records(records):
     clean['date']=pd.to_datetime(clean.date,errors='coerce').dt.normalize()
     for col in SEQUENCE:clean[col]=pd.to_numeric(clean[col],errors='coerce')
     if carry:clean[CARRYOVER_COLUMN]=pd.to_numeric(clean[CARRYOVER_COLUMN],errors='coerce')
+    # Check carryover_days on its own first so a blank or text value gets the specific message.
+    if carry and (clean[CARRYOVER_COLUMN].isna().any() or not np.isfinite(clean[CARRYOVER_COLUMN]).all()):
+        raise ValueError('carryover_days must be a whole number of days, zero or positive.')
     if clean.isna().any().any() or not np.isfinite(clean[SEQUENCE]).all().all():raise ValueError('Input contains missing or non-finite values.')
     if carry and ((clean[CARRYOVER_COLUMN]<0)|(clean[CARRYOVER_COLUMN]%1!=0)).any():raise ValueError('carryover_days must be a whole number of days, zero or positive.')
     if (clean[SEQUENCE]<0).any().any():raise ValueError('Quantities must be zero or positive.')

@@ -28,7 +28,10 @@ def build():
     # data_quality.json stores NaN for dates without a previous snapshot to compare (JSON null here).
     quality = json.loads((source/'data_quality.json').read_text(encoding='utf-8'), parse_constant=lambda _: None)
     payload = {'version':'audited_v3', 'quality':quality,
-        'daily':daily[['part_number','date','actual_d','plan_d1','plan_d2','plan_d3','plan_d4','plan_d5']].to_dict('records'),
+        # carryover_days / calendar_gap_filled / snapshot_base_date let the plan history show
+        # whether a record was newly written, carried over, or filled for a day without logs.
+        'daily':daily[['part_number','date','actual_d','plan_d1','plan_d2','plan_d3','plan_d4','plan_d5']
+                      +[c for c in ('carryover_days','calendar_gap_filled','snapshot_base_date') if c in daily]].to_dict('records'),
         'cv':cv[['part_number','origin_date','target_date','actual','Fold']].to_dict('records'),
         'importance':importance, 'importanceMethod':'XGBoost total_gain · 운영 예측 모델 · 전체 분할 개선량 비율',
         'sources':[{'path':p.relative_to(ROOT).as_posix(),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in files]}

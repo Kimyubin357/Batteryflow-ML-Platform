@@ -12,6 +12,21 @@ def evidence():
     return json.loads((RUNTIME/'demand/evidence.json').read_text(encoding='utf-8'))
 
 
+def record_kind(sample):
+    """New log, carried-over snapshot, or a filled day without logs (audited_v3 daily evidence)."""
+    if sample.empty:
+        return '기록 없음'
+    if 'carryover_days' not in sample:
+        return '구분 정보 없음'
+    base = str(sample.snapshot_base_date.iloc[0])[:10] if 'snapshot_base_date' in sample else ''
+    if 'calendar_gap_filled' in sample and sample.calendar_gap_filled.fillna(False).astype(bool).any():
+        return f'로그 없음 · {base} 계획표로 보간' if base else '로그 없음 · 직전 계획표로 보간'
+    lag = int(sample.carryover_days.max())
+    if lag > 0:
+        return f'이월 {lag}일 · {base} 계획표 기준' if base else f'이월 {lag}일'
+    return '새 관측'
+
+
 def plan_history(repo, data):
     daily = pd.DataFrame(evidence()['daily'])
     ids = {r['part'] for r in data['rows']}
@@ -22,7 +37,8 @@ def plan_history(repo, data):
         sample = daily[daily.part_number.isin(ids) & daily.date.eq(issued)]
         complete = len(sample)==len(ids) and bool(ids)
         rows.append({'시점':f'{horizon}일 전','기록일':issued,'계획량':float(sample[f'plan_d{horizon}'].sum()) if complete else None,
-                     '대상 부품':len(sample),'전체 대상':len(ids),'사용 구분':'예측 당시 확인 가능' if horizon>=3 else '사후 변경 · 예측 미사용'})
+                     '대상 부품':len(sample),'전체 대상':len(ids),'기록 구분':record_kind(sample),
+                     '사용 구분':'예측 당시 확인 가능' if horizon>=3 else '사후 변경 · 예측 미사용'})
     return rows
 
 
@@ -80,5 +96,11 @@ def inspect_csv(contents, quarantined):
     check('최근 3일 연속',len(dates)>=3 and dates.tail(3).diff().dropna().eq(pd.Timedelta(days=1)).all(),'날짜순 정렬 후 최근 3일 확인')
     numbers = frame[required[2:]].apply(pd.to_numeric,errors='coerce')
     check('수량·결측',np.isfinite(numbers.to_numpy()).all() and numbers.ge(0).all().all(),'유한한 0 이상 수량 · 0은 유지')
+    if 'carryover_days' in frame.columns:
+        carry = pd.to_numeric(frame.carryover_days,errors='coerce')
+        whole = carry.notna().all() and np.isfinite(carry.to_numpy()).all() and carry.ge(0).all() and carry.mod(1).eq(0).all()
+        check('이월 일수',bool(whole),'carryover_days는 빈칸 없는 0 이상의 정수 · 0은 당일 갱신, 양수는 이월')
+    else:
+        checks.append({'검사 항목':'이월 일수','결과':'참고','설명':'carryover_days 열 없음 · 모든 행을 당일 갱신으로 보고 계산'})
     checks.append({'검사 항목':'이력 길이','결과':'참고','설명':f'{len(frame)}일 입력 · 8일 권장, 부족한 이력은 기존 모델 대체 규칙 적용'})
     return {'valid':all(x['결과']!='오류' for x in checks),'checks':checks}

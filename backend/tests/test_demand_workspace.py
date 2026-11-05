@@ -54,6 +54,27 @@ class DemandWorkspaceTests(unittest.TestCase):
         self.assertFalse(inspect_csv(b'wrong\n1',[])['valid'])
         self.assertFalse(inspect_csv(b'x'*1_000_001,[])['valid'])
 
+    def test_carryover_days_precheck(self):
+        rows = [{'part_number':'Part 1','date':f'2021-10-{d}','actual_d':0,'plan_d3':0,'plan_d4':0,'plan_d5':0} for d in [27,28,29]]
+        def check(values):
+            frame = pd.DataFrame(rows)
+            if values is not None:
+                frame['carryover_days'] = values
+            result = inspect_csv(frame.to_csv(index=False).encode(),[])
+            return result['valid'], next(c['결과'] for c in result['checks'] if c['검사 항목']=='이월 일수')
+        self.assertEqual(check(None),(True,'참고'))
+        self.assertEqual(check([0,1,0]),(True,'정상'))
+        for bad in ([0,-1,0],[0,0.5,0],[0,'abc',0],[0,None,0]):
+            with self.subTest(values=bad):
+                self.assertEqual(check(bad),(False,'오류'))
+
+    def test_plan_history_marks_carried_and_filled_days(self):
+        repo = Repository()
+        rows = {r['기록일']:r['기록 구분'] for r in plan_history(repo,repo.demand('2021-11-01'))}
+        self.assertEqual(rows['2021-10-29'],'새 관측')
+        self.assertEqual(rows['2021-10-30'],'이월 1일 · 2021-10-29 계획표 기준')
+        self.assertEqual(rows['2021-10-31'],'로그 없음 · 2021-10-29 계획표로 보간')
+
 
 if __name__=='__main__':
     unittest.main()

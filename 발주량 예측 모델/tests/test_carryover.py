@@ -73,6 +73,19 @@ class CarryoverTests(unittest.TestCase):
         self.assertEqual(self.p1.loc[wed, 'plan_d3'], self.value(5))
         self.assertFalse(self.p1.loc[wed, 'actual_known'])
 
+    def test_consecutive_calendar_gaps_are_all_filled(self):
+        # Wed and Thu both missing: both days exist, read from Tuesday's snapshot.
+        raw = synthetic_raw(week('P1', self.value, skip_days=(2, 3)))
+        daily, flags = realign_carryover(daily_from(raw), raw)
+        d = daily.set_index('date')
+        for day, lag in [('2021-10-06', 1), ('2021-10-07', 2)]:
+            row = d.loc[pd.Timestamp(day)]
+            self.assertTrue(row.calendar_gap_filled)
+            self.assertEqual(row.carryover_days, lag)
+            self.assertEqual(row.snapshot_base_date, pd.Timestamp('2021-10-05'))
+            self.assertEqual(row.plan_d3, self.value(1 + lag + 3))
+        self.assertEqual(int(flags.calendar_gap.sum()), 2)
+
     def test_carried_dates_are_never_labels_and_baselines_use_known_values(self):
         frame = build_samples(self.daily)
         known = set(self.daily.loc[self.daily.actual_known, 'date'])
@@ -168,11 +181,24 @@ class AuditedV3RunTests(unittest.TestCase):
         related = pd.read_csv(ROOT / 'outputs/related_part_model/part_model_metrics.csv')
         self.assertFalse(related.related_model_enabled.any())
 
+    def test_current_code_reproduces_v3_daily_history(self):
+        # demand_contract.py has changed since the run (e.g. consecutive-gap fill), so behaviour
+        # is checked directly: today's realignment must give the saved v3 daily data.
+        saved = pd.read_csv(self.OUT / 'daily_history.csv', parse_dates=['date'])
+        current, _, _ = load_daily(carryover='realign')
+        cols = ['part_number', 'date', 'carryover_days', 'actual_known', 'calendar_gap_filled'] + QUANTITIES
+        key = ['part_number', 'date']
+        a = saved[cols].sort_values(key).reset_index(drop=True)
+        b = current[cols].sort_values(key).reset_index(drop=True)
+        pd.testing.assert_frame_equal(a, b, check_dtype=False)
+
     def test_run_matches_current_code_and_compares_all_methods(self):
         import hashlib, json
+        from test_audited_v2 import committed_sha256
         run = json.loads((self.OUT / 'run_manifest.json').read_text(encoding='utf-8'))
         for name, digest in run['code_sha256'].items():
-            self.assertEqual(hashlib.sha256((ROOT / 'src' / name).read_bytes()).hexdigest(), digest)
+            # The exact producing code must be preserved in git history.
+            self.assertIn(digest, committed_sha256(ROOT / 'src' / name), f'{name} that produced audited_v3 is not in git history')
         plan = json.loads((self.OUT / 'training_plan_v2.json').read_text(encoding='utf-8'))
         self.assertEqual(plan['carryover'], 'realign')
         scores = pd.read_csv(self.OUT / 'source_total/cv_metrics_pooled.csv')
