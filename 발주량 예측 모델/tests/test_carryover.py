@@ -138,6 +138,36 @@ class AuditedV3RunTests(unittest.TestCase):
         if not (self.OUT / 'run_manifest.json').exists():
             self.skipTest('audited_v3 has not been generated')
 
+    def test_service_inference_matches_v3_training(self):
+        # The dashboard/CSV service uses audited_v3: XGBoost, compared with the D+3 plan.
+        from contextlib import ExitStack
+        from unittest.mock import patch
+        import inference
+        daily = pd.read_csv(self.OUT / 'daily_history.csv', parse_dates=['date'])
+        frame = build_samples(daily)
+        saved = pd.read_csv(self.OUT / 'source_total/final_holdout_predictions.csv', parse_dates=['origin_date'])
+        inference.load_metadata.cache_clear(); inference.load_artifact.cache_clear()
+        with patch.object(inference, 'MODEL_DIR', ROOT / 'models/audited_v3/source_total/deployment'):
+            for _, row in saved[saved.part_number.eq('Part 94')].iterrows():
+                origin = row.origin_date
+                history = daily[daily.part_number.eq('Part 94') & daily.date.between(origin - pd.Timedelta(days=7), origin)]
+                result = inference.predict_records(history[inference.REQUIRED_COLUMNS + ['carryover_days']])
+                self.assertEqual(result['recommended_model'], 'XGBoost')
+                self.assertAlmostEqual(result['recommended_forecast'], row['XGBoost'], places=4)
+                self.assertEqual(result['auxiliary_model'], 'D+3 Plan Reference')
+                self.assertAlmostEqual(result['auxiliary_prediction'], row['D+3 Plan Reference'])
+                shared, _ = inference.build_feature_row(history[inference.REQUIRED_COLUMNS + ['carryover_days']])
+                training = frame[frame.part_number.eq('Part 94') & frame.origin_date.eq(origin)].iloc[0]
+                for col in ['Last Value', '3-day Moving Average', '7-day Moving Average', 'actual_mean7', 'plan_d3_origin']:
+                    np.testing.assert_allclose(shared.iloc[0][col], training[col], equal_nan=True)
+        inference.load_metadata.cache_clear(); inference.load_artifact.cache_clear()
+
+    def test_dashboard_policy_is_uniform(self):
+        parts = pd.read_csv(ROOT / 'outputs/dashboard_data/csv/parts.csv')
+        self.assertEqual(set(parts.recommended_model.dropna()), {'XGBoost'})
+        related = pd.read_csv(ROOT / 'outputs/related_part_model/part_model_metrics.csv')
+        self.assertFalse(related.related_model_enabled.any())
+
     def test_run_matches_current_code_and_compares_all_methods(self):
         import hashlib, json
         run = json.loads((self.OUT / 'run_manifest.json').read_text(encoding='utf-8'))

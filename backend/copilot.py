@@ -25,7 +25,7 @@ from backend.settings import ROOT, settings
 SOURCES = {
     'seed-v4': ('공식 시드 v4 · 현재 예지보전 정책', 'firestore/SEED_V4.md'),
     'seed-v3': ('공식 시드 v3 · 재학습 데이터 계약', 'firestore/SEED_V3.md'),
-    'demand-validation': ('발주량 · 재학습 검증 및 한계', '발주량 예측 모델/docs/RETRAINING_REPORT_2026-09-27.md'),
+    'demand-validation': ('발주량 · v3 재평가 결과와 한계', '발주량 예측 모델/README.md'),
     'demand-contract': ('발주량 · 학습 및 입력 계약', '발주량 예측 모델/docs/TRAINING_PLAN_V2.md'),
     'maintenance-model': ('예지보전 · 모델 카드', '배터리 예지보전 모델/MODEL_CARD.md'),
     'maintenance-dictionary': ('예지보전 · 데이터 사전', '배터리 예지보전 모델/DATA_DICTIONARY.md'),

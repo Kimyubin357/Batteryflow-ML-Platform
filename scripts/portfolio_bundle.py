@@ -17,7 +17,7 @@ def files():
     roots = ['backend', 'frontend', 'runtime', 'firestore',
              'portfolio_notes/assets', 'portfolio_notes/evidence',
              '발주량 예측 모델/src', '발주량 예측 모델/docs',
-             '발주량 예측 모델/models/audited_v2', '발주량 예측 모델/outputs',
+             '발주량 예측 모델/models/audited_v2', '발주량 예측 모델/models/audited_v3', '발주량 예측 모델/outputs',
              '발주량 예측 모델/Dataset_공급망 최적화 AI 데이터셋/data',
              '배터리 예지보전 모델/src', '배터리 예지보전 모델/docs',
              '배터리 예지보전 모델/outputs/track_b_final_v2',

@@ -28,8 +28,8 @@ def main():
         put('quality/' + test + '.csv.gz', ROOT / '배터리 품질보증 모델/data/raw_data/test' / (test + '.csv'), True)
     for name, source in ARTIFACTS.items():
         put('validation/' + name + '.csv', ROOT / source)
-    for name in ['metadata.json', 'xgboost.joblib', 'lstm.pt']:
-        put('demand/' + name, ROOT / '발주량 예측 모델/models/audited_v2/source_total/deployment' / name)
+    for name in ['metadata.json', 'xgboost.joblib']:  # audited_v3 service: XGBoost vs D+3 plan
+        put('demand/' + name, ROOT / '발주량 예측 모델/models/audited_v3/source_total/deployment' / name)
     put('demand/input_template.csv', ROOT / '발주량 예측 모델/outputs/dashboard_data/inference_input_template.csv')
     put('demand/evidence.json', RUNTIME/'demand/evidence.json')
     # Generated and parity-verified by package_quality.py; preserve during refresh.
@@ -37,7 +37,7 @@ def main():
         put('quality/'+name, RUNTIME/'quality'/name)
     for name in ['frozen.json', 'sample.csv']:
         put('maintenance/'+name, RUNTIME/'maintenance'/name)
-    for obsolete in ['tree_preprocessor.joblib', 'xgboost.json']:
+    for obsolete in ['tree_preprocessor.joblib', 'xgboost.json', 'lstm.pt']:
         path = RUNTIME / 'demand' / obsolete
         if path.is_file():
             path.unlink()  # Original purged_v1 artifacts remain in the research model archive.

@@ -67,7 +67,7 @@ def create_dashboard(meta):
                     html.Div([
                         pack_workspace.controls(),
                         html.Div([select("d-date", "목표일", meta["dates"], meta["dates"][-1]), select("d-part", "부품", [{"label": "전체 부품", "value": "ALL"}]+[{"label": p, "value": p} for p in meta["parts"]], "ALL"),
-                                  settings_disclosure('분석 설정',[select("d-model", "예측 모델", [{"label": name + (" · 운영 기본" if name == meta["demandPrimary"] else " · 학습형 보조" if name == meta["demandAuxiliary"] else " · 비교"), "value": name} for name in meta["demandModels"]], meta["demandPrimary"])]),
+                                  settings_disclosure('분석 설정',[select("d-model", "예측 모델", [{"label": name + (" · 운영 기본" if name == meta["demandPrimary"] else " · 비교 기준" if name == meta["demandAuxiliary"] else " · 비교"), "value": name} for name in meta["demandModels"]], meta["demandPrimary"])]),
                                   ], id="demand-controls", className="filter-toolbar"),
                         html.Div([select("m-run", "시험 파일", meta["runs"], "WeldingTest_04_NG"), settings_disclosure('분석 설정',[select("m-sup", "지도 모델", meta["supervised"], meta["defaultSupervised"]), select("m-unsup", "비지도 모델", meta["unsupervised"], meta["defaultUnsupervised"])])], id="maintenance-controls", className="filter-toolbar"),
                         html.Div([select("q-test", "시험 ID", meta["tests"], "Test07_NG_dchg"), select("q-cell", "선택 셀", [f"M{m:02d}CV{c:02d}" for m in range(1, 17) for c in range(1, 12)], "M02CV01"),

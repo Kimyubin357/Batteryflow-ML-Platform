@@ -22,7 +22,7 @@ class LocalApiTests(unittest.TestCase):
         data = self.client.get('/api/health').json()
         manifest = json.loads((SEED/'manifest.json').read_text(encoding='utf-8'))
         self.assertEqual(data['documents'], manifest['totalDocuments'])
-        self.assertEqual(data['dataVersion'], '2026-09-27.v4')
+        self.assertEqual(data['dataVersion'], '2026-11-05.v5')
         self.assertEqual(data['firebase'], 'configured')
 
     def test_demand_aggregate_matches_parts_and_filters(self):
@@ -35,7 +35,7 @@ class LocalApiTests(unittest.TestCase):
         row = next(row for row in data['rows'] if row['part'] == 'Part 92')
         part = self.client.get('/api/demand', params={'part': 'Part 92'}).json()
         self.assertEqual(part['forecast'], row['forecast'])
-        other = self.client.get('/api/demand', params={'part': 'Part 92', 'model': 'XGBoost'}).json()
+        other = self.client.get('/api/demand', params={'part': 'Part 92', 'model': 'LightGBM'}).json()
         self.assertNotEqual(part['forecast'], other['forecast'])
 
     def test_event_intervals_match_predicted_rows(self):
@@ -98,10 +98,15 @@ class LocalApiTests(unittest.TestCase):
         self.assertEqual(result.status_code, 200, result.text)
         frame = pd.read_csv(io.BytesIO(template))
         origin = pd.to_datetime(frame.date).max()
-        recent = frame[pd.to_datetime(frame.date).ge(origin-pd.Timedelta(days=6))]
-        self.assertAlmostEqual(result.json()['recommended_forecast'], recent.actual_d.mean())
+        latest = frame.loc[pd.to_datetime(frame.date).idxmax()]
+        # audited_v3 service: XGBoost forecast, compared with the existing D+3 plan.
+        self.assertEqual(result.json()['recommended_model'], 'XGBoost')
+        self.assertAlmostEqual(result.json()['recommended_forecast'], result.json()['xgboost_prediction'])
         self.assertEqual(result.json()['target_date'], (origin+pd.Timedelta(days=3)).date().isoformat())
-        self.assertEqual(result.json()['auxiliary_model'], 'LSTM')
+        self.assertEqual(result.json()['auxiliary_model'], 'D+3 Plan Reference')
+        self.assertAlmostEqual(result.json()['auxiliary_prediction'], latest.plan_d3)
+        self.assertIn('carryover_days', frame.columns)
+        self.assertTrue(result.json()['carryover_input'])
         self.assertTrue(result.json()['known_part'])
         self.assertIsInstance(result.json()['xgboost_prediction'], float)
 

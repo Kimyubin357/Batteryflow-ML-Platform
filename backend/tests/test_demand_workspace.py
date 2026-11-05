@@ -29,7 +29,7 @@ class DemandWorkspaceTests(unittest.TestCase):
 
     def test_evidence_cohort_and_importance(self):
         data = diagnostics()
-        self.assertEqual(data['correlationRows'],1289)
+        self.assertEqual(data['correlationRows'],743)
         self.assertEqual(len({r['행 수'] for r in data['metrics']}),1)
         self.assertAlmostEqual(sum(r['percent'] for r in evidence()['importance']),100)
         self.assertNotIn('Part 21',{r['part_number'] for r in evidence()['daily']})

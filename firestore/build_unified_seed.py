@@ -6,6 +6,7 @@ import json
 import math
 import re
 import shutil
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
@@ -16,11 +17,13 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SEED_DIR = ROOT / "firestore" / "seed"
+sys.path.insert(0, str(ROOT / "발주량 예측 모델" / "src"))
+from service_policy import service_models  # noqa: E402
 DEFAULT_WORKSPACE_ID = "manufacturing-ai"
 MAX_DISPLAY_POINTS = 300
 MEASUREMENT_CHUNK_SIZE = 100
 SCHEMA_VERSION = 3
-DATA_VERSION = "2026-09-27.v4"
+DATA_VERSION = "2026-11-05.v5"
 SOURCE_ARTIFACTS: dict[str, str] = {}
 
 
@@ -73,10 +76,10 @@ def read_jsonl(path: Path) -> list[dict[str, Any]]:
 
 def build_demand(base: str) -> tuple[list[dict[str, Any]], dict[str, Any], list[dict[str, Any]]]:
     data_dir = ROOT / "발주량 예측 모델" / "outputs" / "dashboard_data" / "csv"
-    metadata_path = ROOT / '발주량 예측 모델/outputs/audited_v2/metadata.json'
+    metadata_path = ROOT / '발주량 예측 모델/outputs/audited_v3/metadata.json'
     SOURCE_ARTIFACTS[metadata_path.relative_to(ROOT).as_posix()] = hashlib.sha256(metadata_path.read_bytes()).hexdigest()
     metadata = json.loads(metadata_path.read_text(encoding='utf-8'))
-    policy, auxiliary = metadata['selection']['overall_method'], metadata['selection']['ml_model']
+    policy, auxiliary = service_models(metadata['selection'])
     parts = source_csv(data_dir / "parts.csv")
     history = source_csv(data_dir / "daily_history.csv")
     forecasts = source_csv(data_dir / "predictions_test.csv")
