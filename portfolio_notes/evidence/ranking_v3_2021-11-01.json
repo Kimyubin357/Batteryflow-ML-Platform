@@ -1,0 +1,29 @@
+{
+  "generated": "2026-11-05",
+  "source": "Batteryflow-ML-Platform main 2c01a72, firestore/seed dataVersion 2026-11-05.v5",
+  "targetDate": "2021-11-01",
+  "model": "XGBoost",
+  "comparison": "D+3 Plan Reference",
+  "rule": "abs(gap) descending, ties by part number ascending; gap rounded to 0.01",
+  "top3": [
+    {
+      "part": "Part 92",
+      "forecast": 203.9,
+      "plan": 102.0,
+      "gap": 101.9
+    },
+    {
+      "part": "Part 106",
+      "forecast": 419.47,
+      "plan": 335.0,
+      "gap": 84.47
+    },
+    {
+      "part": "Part 95",
+      "forecast": 91.2,
+      "plan": 44.0,
+      "gap": 47.2
+    }
+  ],
+  "serverAnswer": "2021-11-01 · XGBoost 기준, 계획과 예측 차이의 절댓값이 큰 순서입니다. 차이는 소수 둘째 자리 기준이며, 동률은 부품 번호가 작은 순서입니다.\n1. Part 92: 예측 203.90개 / 계획 102.00개 / 차이 +101.90개 (상향 검토)\n2. Part 106: 예측 419.47개 / 계획 335.00개 / 차이 +84.47개 (상향 검토)\n3. Part 95: 예측 91.20개 / 계획 44.00개 / 차이 +47.20개 (상향 검토)\n자동 발주 지시가 아닌 검토 대상입니다."
+}
