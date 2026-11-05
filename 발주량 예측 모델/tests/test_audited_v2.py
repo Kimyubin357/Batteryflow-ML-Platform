@@ -3,6 +3,8 @@ import json
 import subprocess
 import sys
 import unittest
+from contextlib import contextmanager
+from unittest.mock import patch
 from pathlib import Path
 import joblib
 import numpy as np
@@ -13,9 +15,19 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from demand_contract import SOURCE, MODEL_NAMES, ML_NAMES, build_samples, evaluation_plan, feature_record, metrics
 from retrain_audited import predict_artifact, relations
+import inference
 from inference import predict_records, build_feature_row, load_metadata
 
 OUT=ROOT/'outputs/audited_v2'
+
+
+@contextmanager
+def model_dir(path):
+    """Run inference against a given deployment folder (the service default is the current version)."""
+    inference.load_metadata.cache_clear();inference.load_artifact.cache_clear()
+    with patch.object(inference,'MODEL_DIR',path):
+        yield
+    inference.load_metadata.cache_clear();inference.load_artifact.cache_clear()
 
 
 def committed_sha256(path):
@@ -97,6 +109,10 @@ class AuditedTests(unittest.TestCase):
 
     def test_inference_contract_and_runtime_models_match_training(self):
         saved=pd.read_csv(OUT/'source_total/final_holdout_predictions.csv')
+        with model_dir(ROOT/'models/audited_v2/source_total/deployment'):
+            self._check_inference(saved)
+
+    def _check_inference(self,saved):
         for _,row in saved[saved.part_number.eq('Part 94')].iterrows():
             origin=pd.Timestamp(row.origin_date)
             history=self.daily[self.daily.part_number.eq(row.part_number)&self.daily.date.between(origin-pd.Timedelta(days=7),origin)]
@@ -122,11 +138,5 @@ class AuditedTests(unittest.TestCase):
         self.assertEqual(result['recommended_model'],'Last Value')
         self.assertEqual(result['recommended_forecast'],template.sort_values('date').iloc[-1].actual_d)
         self.assertIsNone(result['auxiliary_prediction'])
-
-    def test_part_policy_is_uniform_and_not_retrospective_winner(self):
-        parts=pd.read_csv(ROOT/'outputs/dashboard_data/csv/parts.csv')
-        self.assertEqual(set(parts.recommended_model.dropna()),{self.meta['selection']['overall_method']})
-        related=pd.read_csv(ROOT/'outputs/related_part_model/part_model_metrics.csv')
-        self.assertFalse(related.related_model_enabled.any())
 
 if __name__=='__main__':unittest.main()

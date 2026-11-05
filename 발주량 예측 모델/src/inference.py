@@ -7,9 +7,13 @@ import joblib
 import numpy as np
 import pandas as pd
 from demand_contract import ROOT, SEQUENCE, BASELINES, feature_record
+from service_policy import service_models
 
-MODEL_DIR=Path(os.environ.get('MANUFACTURING_DEMAND_MODEL_DIR',ROOT/'models/audited_v2/source_total/deployment'))
+MODEL_DIR=Path(os.environ.get('MANUFACTURING_DEMAND_MODEL_DIR',ROOT/'models/audited_v3/source_total/deployment'))
 REQUIRED_COLUMNS=['part_number','date',*SEQUENCE]
+# Optional: days since the snapshot was last really updated (0 = written that day). Rows with
+# carryover_days>0 repeat an earlier plan; their actual_d is not an observed final quantity.
+CARRYOVER_COLUMN='carryover_days'
 
 @lru_cache(maxsize=1)
 def load_metadata():
@@ -18,7 +22,8 @@ def load_metadata():
 def validate_records(records):
     missing=set(REQUIRED_COLUMNS)-set(records.columns)
     if missing:raise ValueError('Missing columns: '+', '.join(sorted(missing)))
-    clean=records[REQUIRED_COLUMNS].copy()
+    carry=CARRYOVER_COLUMN in records.columns
+    clean=records[REQUIRED_COLUMNS+([CARRYOVER_COLUMN] if carry else [])].copy()
     if not 3<=len(clean)<=60:raise ValueError('Provide 3 to 60 daily rows; 8 days are recommended.')
     if clean.part_number.isna().any() or clean.part_number.astype(str).nunique()!=1:
         raise ValueError('All rows must use the same valid part_number.')
@@ -26,7 +31,9 @@ def validate_records(records):
     if clean.part_number.eq('').any():raise ValueError('part_number is empty.')
     clean['date']=pd.to_datetime(clean.date,errors='coerce').dt.normalize()
     for col in SEQUENCE:clean[col]=pd.to_numeric(clean[col],errors='coerce')
+    if carry:clean[CARRYOVER_COLUMN]=pd.to_numeric(clean[CARRYOVER_COLUMN],errors='coerce')
     if clean.isna().any().any() or not np.isfinite(clean[SEQUENCE]).all().all():raise ValueError('Input contains missing or non-finite values.')
+    if carry and ((clean[CARRYOVER_COLUMN]<0)|(clean[CARRYOVER_COLUMN]%1!=0)).any():raise ValueError('carryover_days must be a whole number of days, zero or positive.')
     if (clean[SEQUENCE]<0).any().any():raise ValueError('Quantities must be zero or positive.')
     if clean.date.duplicated().any():raise ValueError('Duplicate daily records require review.')
     clean=clean.sort_values('date').reset_index(drop=True)
@@ -37,6 +44,8 @@ def validate_records(records):
 
 def build_feature_row(records):
     clean=validate_records(records);origin=clean.iloc[-1].date
+    if CARRYOVER_COLUMN in clean.columns:
+        clean[CARRYOVER_COLUMN]=clean[CARRYOVER_COLUMN].astype(int);clean['actual_known']=clean[CARRYOVER_COLUMN].eq(0)
     row=feature_record(clean,origin)
     return pd.DataFrame([row]),row
 
@@ -74,7 +83,7 @@ def predict_model(name,frame):
 
 def predict_records(records):
     frame,context=build_feature_row(records);meta=load_metadata();part=context['part_number']
-    known=part in meta['model']['part_to_id'];method=meta['selection']['overall_method'];aux=meta['selection']['ml_model']
+    known=part in meta['model']['part_to_id'];method,aux=service_models(meta['selection'])
     fallback=None
     if not known:fallback='학습 이력이 없는 부품: 최근값 기준 예측';method='Last Value'
     if method=='Related LightGBM':fallback='연관 부품의 현재 입력 미제공: 최근값 기준 예측';method='Last Value'
@@ -87,6 +96,7 @@ def predict_records(records):
         'moving_average_3d':context['3-day Moving Average'],'plan_d3_reference':context['D+3 Plan Reference'],
         'recommended_model':method,'recommended_forecast':forecast,'model_version':meta['version'],
         'fallback_reason':fallback,'history_days_7':context['history_count7'],
+        'carryover_input':CARRYOVER_COLUMN in records.columns,
         'input_warning':'최근 7일 중 일부 이력이 없어 관측된 날짜만 평균에 사용합니다.' if context['history_count7']<7 else None,
         'as_of':'일별 최종 로그 확정 이후','evaluation_note':'과거 자료의 회고 검증 결과이며 새 현장 성능 보장은 아닙니다.'}
 

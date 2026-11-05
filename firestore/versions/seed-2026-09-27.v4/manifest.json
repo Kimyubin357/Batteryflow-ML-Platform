@@ -1,0 +1,143 @@
+{
+  "format": "firestore-document-jsonl-v1",
+  "schemaVersion": 3,
+  "dataVersion": "2026-09-27.v4",
+  "supersedes": "2026-09-27.v3",
+  "deploymentStatus": "local_only_pending_upload",
+  "sourceArtifacts": [
+    {
+      "path": "발주량 예측 모델/outputs/audited_v2/metadata.json",
+      "sha256": "887a391366be19dc7a2331867bce31617526ba9848c5eded456d088ce426a6a0"
+    },
+    {
+      "path": "발주량 예측 모델/outputs/dashboard_data/csv/daily_history.csv",
+      "sha256": "d20d771ef30f3c4f61be5f424b6f56453af70092bab009b5bc95ae46978415c9"
+    },
+    {
+      "path": "발주량 예측 모델/outputs/dashboard_data/csv/data_quality.csv",
+      "sha256": "721e5e300e4a65672ac0b34cf858e6fddfcbc1af647ab19ede77120574589fc9"
+    },
+    {
+      "path": "발주량 예측 모델/outputs/dashboard_data/csv/model_metrics.csv",
+      "sha256": "cc97e7c32dc7a9114e6a4b478ee83e4fadd0f20544bb3e553b77658e9cc929bf"
+    },
+    {
+      "path": "발주량 예측 모델/outputs/dashboard_data/csv/model_metrics_per_part.csv",
+      "sha256": "bf63b3ba151e4022bb54ff6c818848765a8ae0263925d81029af6219d4d65858"
+    },
+    {
+      "path": "발주량 예측 모델/outputs/dashboard_data/csv/parts.csv",
+      "sha256": "8c06460ba996d6d95b48b67f7770f6cbc13fa1ac4781d2140ef2277d6e37a012"
+    },
+    {
+      "path": "발주량 예측 모델/outputs/dashboard_data/csv/predictions_test.csv",
+      "sha256": "1a6da943c35955535b5cefcbfeaaac112b17d29a8eacf795b97578b9c9e2e133"
+    },
+    {
+      "path": "발주량 예측 모델/outputs/dashboard_data/csv/walk_forward_metrics_pooled.csv",
+      "sha256": "a9df30380db9f43b21d8827384f31d726880128954202a344070a11544709e98"
+    },
+    {
+      "path": "배터리 예지보전 모델/firestore/seed/anomaly_events.jsonl",
+      "sha256": "1600c6dd6d4d5122a214d6c56a622eb8b7a3f8cda0f1920b80acc9fe0857c0ae"
+    },
+    {
+      "path": "배터리 예지보전 모델/firestore/seed/data_quality.jsonl",
+      "sha256": "5d5de92592bd92d142e9c66c1349227dcfe041feaf5d1e8aa9501cb4b1cf05a9"
+    },
+    {
+      "path": "배터리 예지보전 모델/firestore/seed/measurements.jsonl",
+      "sha256": "042190805be3876f25da52a3bd1cc08a8a9f6f6574d443500c1f9c5d0ff9c42b"
+    },
+    {
+      "path": "배터리 예지보전 모델/firestore/seed/model_evaluations.jsonl",
+      "sha256": "dba411929252c2823cc25765ef6325ff69ca0af8af9ae6eb263a95d85cd98a80"
+    },
+    {
+      "path": "배터리 예지보전 모델/firestore/seed/projects.jsonl",
+      "sha256": "31dfe0ecd8539b97106e28b5d9c97eb7d5f522daf3c0419421f563c81d53c17a"
+    },
+    {
+      "path": "배터리 예지보전 모델/firestore/seed/welding_runs.jsonl",
+      "sha256": "a45ea48cdc16294ac800e7b2a604be5a2db0ba5cc107f8598138dd4f749eb955"
+    },
+    {
+      "path": "배터리 품질보증 모델/data/raw_data/test/Test03_OK_chg.csv",
+      "sha256": "694ddcdae78e5d1b2b7de536da85882fa3a30ab66d2bf9502759d65b48c039a2"
+    },
+    {
+      "path": "배터리 품질보증 모델/data/raw_data/test/Test04_OK_dchg.csv",
+      "sha256": "bfd7093559e389f38c5c1efbe39ca6f21b4638fdf9d54be8398b93da13020728"
+    },
+    {
+      "path": "배터리 품질보증 모델/data/raw_data/test/Test06_NG_chg.csv",
+      "sha256": "7e24dca08c95135c23c3d4c239194f4baeeb3e0b7ab627b6338a380e1819ea4c"
+    },
+    {
+      "path": "배터리 품질보증 모델/data/raw_data/test/Test07_NG_dchg.csv",
+      "sha256": "e22d809b7549b36e4404ae552be295b0e0bf269673395d97f33345fda3252ad7"
+    },
+    {
+      "path": "배터리 품질보증 모델/data/raw_data/test/Test08_NG_chg.csv",
+      "sha256": "7c190681baae053ce7fc0229f8582a2e0653353af8809074a3cdc44076b6cb26"
+    },
+    {
+      "path": "배터리 품질보증 모델/output/metrics_mtadgan_normal_locked_final.csv",
+      "sha256": "38c62fb0e331217e52a94fe91dd2de622c95e0c4bb1bf292456d15f9410e45c4"
+    },
+    {
+      "path": "배터리 품질보증 모델/output/models/00_데이터_요약.csv",
+      "sha256": "3c80ca3c1b54cd68de381a0e002de126afc63f03363a9e12f09f64b0215605d1"
+    },
+    {
+      "path": "배터리 품질보증 모델/output/models/00_모델별_교차검증.csv",
+      "sha256": "27380ac6d04efcfc475ee126af288920092ff71fc997212db855582e63986793"
+    },
+    {
+      "path": "배터리 품질보증 모델/output/models/00_모델별_성능비교.csv",
+      "sha256": "f2cfb3f058937f038f2a68eb6960ebbe250527ccb024943f2c65aa5f25ad07fe"
+    },
+    {
+      "path": "배터리 품질보증 모델/output/models/00_모델별_파일별결과.csv",
+      "sha256": "1e5efbb65a4e5ac04f3b1ef3c4aebd9ea44e6dec655d1414cb1b31f470a2b4c5"
+    },
+    {
+      "path": "배터리 품질보증 모델/output/models/model_C_pca_t2_spe_관리한계탐색.csv",
+      "sha256": "ca5c80f550219d05682ca521d412f77ac45f3e4ebdad17679d71bb3252a29e00"
+    },
+    {
+      "path": "배터리 품질보증 모델/output/models/model_C_pca_t2_spe_이상점수.csv",
+      "sha256": "94093f5670d773f0cc12ef7603bbe35d7ab7c0cbc27fd5233ec1a5d43ae27a1e"
+    }
+  ],
+  "workspaceId": "manufacturing-ai",
+  "rootDocument": "manufacturingAi/manufacturing-ai",
+  "generatedAt": "2026-09-27T05:23:41.435439+00:00",
+  "files": [
+    {
+      "file": "core.jsonl",
+      "documents": 7,
+      "bytes": 3845,
+      "sha256": "770e7820ded147177462153555399152a969af0e6e48a77cf7e1e5ff88a89afc"
+    },
+    {
+      "file": "demand.jsonl",
+      "documents": 128,
+      "bytes": 1322667,
+      "sha256": "c3e5abbea541d1d513f3c8b4f2c70a750dcae4d2108cfa48d94b0194940c2940"
+    },
+    {
+      "file": "maintenance.jsonl",
+      "documents": 105,
+      "bytes": 5244164,
+      "sha256": "9261931ce5ca4261b2f147460b1a08d3a42c1ecfdacedbb55961b3cf504082e8"
+    },
+    {
+      "file": "quality.jsonl",
+      "documents": 35,
+      "bytes": 405276,
+      "sha256": "6a2501847f5a323aaef2a5812bc9f770b3283b242ab1eab0ce6ab1da487148a3"
+    }
+  ],
+  "totalDocuments": 275
+}

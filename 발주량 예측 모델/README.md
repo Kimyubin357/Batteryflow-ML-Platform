@@ -2,7 +2,7 @@
 
 가이드북의 일별 최종 ERP 발주 계획량을 달력 3일 앞서 예측합니다. 일별 마지막 로그 이후 사용하며 실측 소비량·재고 최적화 모델은 아닙니다.
 
-**서비스와 대시보드는 아직 audited_v2 모델을 사용합니다.** audited_v3는 v2 평가의 데이터 정렬 오류를 바로잡은 연구 결과이며, 아래 결론에 따라 v2의 정책(7일 이동평균 기본 / LSTM 보조)은 더 이상 근거가 없습니다. 서비스 교체는 별도로 결정합니다.
+**2026-11-05부터 서비스와 대시보드는 audited_v3를 사용합니다.** XGBoost 예측을 기존 D+3 계획과 비교해 보여 주며, 개선은 확정되지 않았다고 표시합니다. audited_v3는 v2 평가의 데이터 정렬 오류를 바로잡은 결과이며, v2의 정책(7일 이동평균 기본 / LSTM 보조)은 철회했습니다.
 
 ## audited_v3에서 바로잡은 것
 
@@ -60,7 +60,7 @@ python -m unittest discover -s tests -v
 
 옵션 없이 실행하면 audited_v2와 같은 자료·분할을 만듭니다. PyTorch를 불러올 수 없는 환경에서는 `--skip-lstm`으로 나머지 8가지 방법만 비교할 수 있습니다.
 
-서비스 자료(audited_v2) 갱신 순서는 그대로입니다: `src/build_dashboard_assets.py` → `src/train_related_part_model.py` → 루트의 `firestore/build_unified_seed.py` → `scripts/package_runtime.py`. Firebase 업로드는 별도 동작입니다. `train_final.py`, `evaluate_purged.py` 등 이전 학습 스크립트와 purged_v1/final_v3 모델은 과거 실험 자료입니다.
+서비스 자료 갱신 순서: `src/build_dashboard_assets.py` → `src/train_related_part_model.py` → 루트의 `firestore/build_unified_seed.py` → `scripts/package_runtime.py` → `scripts/package_demand_evidence.py`. 서비스가 쓰는 버전과 모델 조합은 `src/service_policy.py` 한 곳에서 정합니다. CSV 추론은 선택 열 `carryover_days`(이월된 날의 경과 일수)를 받습니다. Firebase 업로드는 별도 동작입니다. `train_final.py`, `evaluate_purged.py` 등 이전 학습 스크립트와 purged_v1/final_v3 모델은 과거 실험 자료입니다.
 
 - [학습·검증 설계 (v2)](docs/TRAINING_PLAN_V2.md) · [v2 재학습 결과](docs/RETRAINING_REPORT_2026-09-27.md) · [보완 전 감사](docs/ML_AUDIT_2026-09-27.md)
 

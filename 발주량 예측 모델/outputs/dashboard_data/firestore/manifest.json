@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-26T18:17:23.340204+00:00",
+  "generated_at": "2026-11-05T02:20:25.176524+00:00",
   "format": "UTF-8 JSON Lines; one Firestore document per line",
   "collections": [
     {
@@ -11,13 +11,13 @@
     {
       "collection": "daily_history",
       "file": "daily_history.jsonl",
-      "document_count": 5380,
+      "document_count": 5488,
       "document_id_field": "document_id"
     },
     {
       "collection": "forecasts",
       "file": "forecasts.jsonl",
-      "document_count": 750,
+      "document_count": 643,
       "document_id_field": "document_id"
     },
     {
@@ -35,7 +35,7 @@
     {
       "collection": "daily_summary",
       "file": "daily_summary.jsonl",
-      "document_count": 7,
+      "document_count": 6,
       "document_id_field": "document_id"
     },
     {
@@ -47,13 +47,13 @@
     {
       "collection": "data_quality",
       "file": "data_quality.jsonl",
-      "document_count": 21,
+      "document_count": 28,
       "document_id_field": "document_id"
     },
     {
       "collection": "walk_forward_metrics",
       "file": "walk_forward_metrics.jsonl",
-      "document_count": 27,
+      "document_count": 18,
       "document_id_field": "document_id"
     },
     {

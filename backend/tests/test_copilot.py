@@ -41,9 +41,9 @@ class CopilotTests(unittest.TestCase):
         response=self.response({'candidates':[{'content':{'parts':[{'text':'{"answer":"Part 92, Part 95, Part 63","citations":["SCREEN"]}'}]}}]})
         with patch.object(self.copilot,'retrieve',return_value=[]),patch('backend.copilot.httpx.post',return_value=response):
             answer=self.copilot.answer('계획과 차이가 큰 부품 3개',{'track':'overview'},[])
-        self.assertIn('2. Part 60',answer['text'])
-        self.assertIn('3. Part 66',answer['text'])
-        self.assertNotIn('Part 95',answer['text'])
+        self.assertIn('2. Part 106',answer['text'])
+        self.assertIn('3. Part 95',answer['text'])
+        self.assertNotIn('Part 63',answer['text'])
 
     def test_firestore_outage_prevents_gemini_spend(self):
         service, copilot = FakeService(), FakeCopilot()

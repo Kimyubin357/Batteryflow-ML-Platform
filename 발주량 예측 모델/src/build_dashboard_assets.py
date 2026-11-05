@@ -19,13 +19,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from service_policy import SERVICE_VERSION, service_models
 from demand_contract import SOURCE as DATA_PATH, MODEL_NAMES as ALL_MODELS, metrics as calculate_metrics, build_samples
 REFERENCE_MODEL = 'D+3 Plan Reference'
 MODEL_NAMES = [m for m in ALL_MODELS if m != REFERENCE_MODEL]
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FINAL_DIR = ROOT / "outputs" / "audited_v2" / "source_total"
+FINAL_DIR = ROOT / "outputs" / "audited_v3" / "source_total"
 WALK_DIR = FINAL_DIR
 OUTPUT_DIR = ROOT / "outputs" / "dashboard_data"
 CSV_DIR = OUTPUT_DIR / "csv"
@@ -35,7 +36,7 @@ MODEL_COLUMNS = MODEL_NAMES + [REFERENCE_MODEL]
 
 
 def current_metadata():
-    return json.loads((ROOT / 'outputs/audited_v2/metadata.json').read_text(encoding='utf-8'))
+    return json.loads((ROOT / 'outputs/audited_v3/metadata.json').read_text(encoding='utf-8'))
 
 
 def slug(value: object) -> str:
@@ -427,7 +428,7 @@ def main() -> None:
     metrics = pd.read_csv(FINAL_DIR / "final_holdout_metrics.csv")
     metrics["Eligible_For_Ranking"] = metrics["Eligible_For_Overall_Ranking"]
     metadata = current_metadata()
-    daily = pd.read_csv(ROOT / 'outputs/audited_v2/daily_history.csv', parse_dates=['date','timestamp'])
+    daily = pd.read_csv(ROOT / 'outputs/audited_v3/daily_history.csv', parse_dates=['date','timestamp'])
     raw = pd.read_excel(DATA_PATH)
     samples = build_samples(daily)
     coverage_rows = []
@@ -555,13 +556,14 @@ def main() -> None:
     config = {
         "primary_method": metadata['selection']['overall_method'],
         "primary_ml_model": metadata['selection']['ml_model'],
+        "comparison_model": service_models(metadata['selection'])[1],
         "fallback_model": "Last Value",
         "overall_holdout_winner": metrics.sort_values("MAE").iloc[0]["Model"],
         "forecast_horizon_days": 3,
         "sequence_length_days": 3,
         "test_start": predictions["target_date"].min(),
         "test_end": predictions["target_date"].max(),
-        "model_version": "audited_v2",
+        "model_version": SERVICE_VERSION,
         "selection_basis": metadata['selection']['selection_basis'],
         "evaluation_label": "retrospective_previously_observed_period",
         "quarantined_parts": metadata['quarantined_parts'],
@@ -599,7 +601,8 @@ def main() -> None:
     save_figures(metrics, predictions, part_metrics, walk_fold)
 
     holdout_winner = metrics[metrics["Eligible_For_Ranking"]].sort_values("MAE").iloc[0]
-    auxiliary = walk_pooled[walk_pooled['Model'] == metadata['selection']['ml_model']].iloc[0]
+    primary_name, comparison = service_models(metadata['selection'])
+    auxiliary = walk_pooled[walk_pooled['Model'] == comparison].iloc[0]
     walk_text = "Walk-forward result was not available."
     if walk_pooled is not None:
         walk_winner = walk_pooled[walk_pooled["Model"].isin(MODEL_NAMES)].sort_values("MAE").iloc[0]
@@ -610,9 +613,9 @@ def main() -> None:
 
 - 회고 평가 1위: **{holdout_winner['Model']}**, MAE {holdout_winner['MAE']:.4f}. 새 독립 시험이 아니다.
 - 시간 분리 반복검증 전체 1위: **{metadata['selection']['overall_method']}**
-- 반복검증 학습형 후보 1위: **{auxiliary['Model']}**, MAE {auxiliary['MAE']:.4f}
+- 서비스 비교 기준: **{auxiliary['Model']}**, MAE {auxiliary['MAE']:.4f}
 - {walk_text}
-- 운영안: {metadata['selection']['overall_method']} 기본 예측 + {auxiliary['Model']} 학습형 보조. 부품별 시험 점수로 바꾸지 않는다.
+- 운영안: {primary_name} 기본 예측 + {auxiliary['Model']} 비교. 부품별 시험 점수로 바꾸지 않는다.
 
 ## 분석 범위
 
@@ -634,7 +637,8 @@ def main() -> None:
 
 
 def REQUIRED_INFERENCE_COLUMNS() -> list[str]:
-    return ["part_number", "date", "actual_d", "plan_d3", "plan_d4", "plan_d5"]
+    # audited_v3 daily history carries carryover_days; inference reads it when present.
+    return ["part_number", "date", "actual_d", "plan_d3", "plan_d4", "plan_d5", "carryover_days"]
 
 
 if __name__ == "__main__":

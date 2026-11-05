@@ -32,7 +32,8 @@ def analysis(data, tab, actions, query, direction, columns):
                     disabled=key=='open' and unavailable) for key,label in [('all','전체'),('up','↑ 상향'),('down','↓ 하향'),('open','미확인')]],gap='xs')
         return html.Div([context,panel('검토 방향과 확인 상태',buttons,'검색된 검토 대상 기준 · 계획 차이가 max(10개, 계획량의 20%) 이상'),table]),rows
     chart = demand_chart(data['trend'])
-    if data['model']!=data['config']['auxiliaryModel']:
+    # The D+3 plan is already drawn; only a separate learned comparison model needs its own line.
+    if data['model']!=data['config']['auxiliaryModel'] and data['config']['auxiliaryModel']!='D+3 Plan Reference':
         chart.add_trace(go.Scatter(x=[r['date'] for r in data['trend']],y=[r['auxiliary'] for r in data['trend']],
                        name=data['config']['auxiliaryModel']+' 보조 · 클릭하여 보기',visible='legendonly',mode='lines',line={'color':CYAN,'dash':'dash'}))
     ranked = sorted(rows,key=lambda r:abs(r['gap']),reverse=True)[:8]
@@ -52,9 +53,9 @@ def analysis(data, tab, actions, query, direction, columns):
         kpi('기존 D+3 계획',num(data['plan']),data['date'],unit='개'),
         kpi('계획 대비 차이',f"{data['gap']:+,.0f}",num(data['gapPct'],2)+'%','danger' if data['gap']>0 else 'accent',unit='개'),
         kpi('검토 필요 부품',data['reviewCount'],f"상향 {counts['up']} · 하향 {counts['down']}",unit='개')],className='kpi-strip'),
-        html.Div([panel('D+3 계획·예측 비교',graph(chart),'범례를 눌러 보조 예측 표시 · 최종 기록량은 사후 비교값'),
+        html.Div([panel('D+3 계획·예측 비교',graph(chart),'범례를 눌러 선 표시·숨김 · 최종 기록량은 사후 비교값'),
                   panel('검토 방향',[metric_rows([('상향 검토',f"{counts['up']}개",'예측이 계획보다 큰 부품'),('하향 검토',f"{counts['down']}개",'예측이 계획보다 작은 부품'),('확인 대기',num(counts['open'])+'개' if counts['open'] is not None else '조회 불가','작업자 확인 기준')]),
-                       html.Details([html.Summary('예측 해석 기준'),html.P(f"운영 기본 {data['config']['primaryModel']} · 보조 {data['config']['auxiliaryModel']}. 재고·리드타임은 포함되지 않습니다.")],className='source-details')])],className='grid-main'),
+                       html.Details([html.Summary('예측 해석 기준'),html.P(f"운영 예측 {data['config']['primaryModel']} · 비교 기준 {data['config']['auxiliaryModel']}. 시험 목표일이 13일뿐이라 기존 계획 대비 개선은 확정되지 않았습니다. 휴일에 이월된 계획표는 실제 기준일로 다시 읽었습니다. 재고·리드타임은 포함되지 않습니다.")],className='source-details')])],className='grid-main'),
         html.Div([panel('계획 차이가 큰 부품',graph(gaps),'절대 차이 상위 8개 · 빨강 상향 / 파랑 하향'),table],className='demand-comparison-grid'),
         html.Details([html.Summary('계획 변경 이력'),panel('같은 목표일의 계획 변경 이력',grid(data['planHistory'],'d-plan-history',height=275),
               '5·4·3일 전은 예측 당시 확인 가능 · 2·1일 전은 사후 정보')],className='demand-details')],className='demand-workspace'),rows
@@ -90,8 +91,8 @@ def validation_panels(data):
         panel('계획 발표 시점별 오차와 편향',grid(data['metrics'],'d-plan-metrics',columns,height=280),
               '모든 시점의 계획이 있는 동일 부품·목표일만 비교 · Bias=계획−최종 기록량, 음수는 과소 · 2·1일 전은 사후 참고'),
         html.Div([panel('입력 변수와 목표값 상관관계',graph(heat),'Pearson · CV 표본 전체의 기술 통계 · 부품 규모 영향 포함 · 인과·성능 아님 · 상수/부족 표본은 공란'),
-                  panel('XGBoost 비교 모델의 변수 중요도',graph(fig),data['importanceMethod']+' · 전체 부품 고정')],className='grid-equal'),
-        callout('중요도의 해석 범위','XGBoost는 비교 모델입니다. 7일 이동평균·LSTM의 설명이나 개별 예측 기여도가 아닙니다. D+n은 각 기록일 기준 계획입니다. 상관된 변수는 중요도가 분산될 수 있습니다.'),
+                  panel('XGBoost 운영 모델의 변수 중요도',graph(fig),data['importanceMethod']+' · 전체 부품 고정')],className='grid-equal'),
+        callout('중요도의 해석 범위','전체 분할 개선량 비율이며 개별 예측의 기여도가 아닙니다. D+n은 각 기록일 기준 계획이고, 이월된 휴일 기록은 실제 기준일로 다시 읽은 값입니다. 상관된 변수는 중요도가 분산될 수 있습니다.'),
         html.Details([html.Summary('데이터 처리 근거 · 원본 충돌과 수량 정의'),grid(quality,'d-quality-evidence',height=250),
             html.P(f"Total과 시간대 합계 불일치: 당일 {q['total_slot_mismatch_rows']['actual_d']}행, D+3 {q['total_slot_mismatch_rows']['plan_d3']}행, D+4 {q['total_slot_mismatch_rows']['plan_d4']}행. 현재 기준은 원본 Total이며 수량 정의를 임의 전환하지 않습니다.",className='section-note')],className='demand-details')])
 

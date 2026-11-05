@@ -127,7 +127,7 @@ def register(app, request, portfolio=False):
 
     @app.callback(*[Output('chat-suggestion-'+str(i),'children') for i in range(3)],Input('url','pathname'))
     def suggestions(path):
-        return {'/demand':['계획과 차이가 큰 부품 3개를 찾아줘','미확인 검토 부품을 찾아줘','왜 기본 모델이 7일 이동평균이야?'],
+        return {'/demand':['계획과 차이가 큰 부품 3개를 찾아줘','미확인 검토 부품을 찾아줘','왜 기본 모델이 XGBoost야?'],
                 '/maintenance':['현재 시험에서 점검할 이벤트를 찾아줘','출력 0W 구간을 찾아줘','현재 예지보전 모델의 검증 한계는?'],
                 '/quality':['현재 시험의 불량 유형 근거를 설명해줘','선택 셀에서 확인할 점을 알려줘','작업자 판정 기록을 찾아줘']}.get(path,['각 업무에서 검토할 대상을 찾아줘','계획과 차이가 큰 부품 3개를 찾아줘','현재 예지보전 모델의 검증 한계는?'])
 

@@ -28,9 +28,9 @@ class CopilotSearchTests(unittest.TestCase):
         facts,links,error=search(self.repo,context,'상위 부품')
         self.assertEqual(facts['matches'][0]['part'],self.repo.demand()['rows'][0]['part'])
         facts,_,_=search(self.repo,context,'계획과 차이가 큰 부품 3개')
-        self.assertEqual([r['part'] for r in facts['rankedResults']],['Part 92','Part 60','Part 66'])
-        self.assertIn('-284.86',ranked_answer(facts))
-        self.assertNotIn('Part 95',ranked_answer(facts))
+        self.assertEqual([r['part'] for r in facts['rankedResults']],['Part 92','Part 106','Part 95'])
+        self.assertIn('84.47',ranked_answer(facts))
+        self.assertNotIn('Part 28',ranked_answer(facts))
 
     def test_ranking_is_independent_of_repository_document_order(self):
         repo=Repository()
@@ -39,9 +39,9 @@ class CopilotSearchTests(unittest.TestCase):
         self.assertEqual(repo.demand()['rows'],expected)
         facts,links,error=search(repo,{'track':'demand','part':'ALL'},'상위 부품 3개')
         self.assertIsNone(error)
-        self.assertEqual([r['part'] for r in facts['rankedResults']],['Part 92','Part 60','Part 66'])
+        self.assertEqual([r['part'] for r in facts['rankedResults']],['Part 92','Part 106','Part 95'])
         self.assertIn('동률',ranked_answer(facts))
-        self.assertIn('part=Part+60',links[1]['url'])
+        self.assertIn('part=Part+106',links[1]['url'])
 
     def test_numeric_ties_at_top_three_cutoff_ignore_input_order(self):
         payload=self.repo.demand()

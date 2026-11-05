@@ -1,113 +1,112 @@
 ﻿part_number,baseline_model,baseline_mae,related_model_mae,improvement_pct,related_model_enabled,validation_note
-Part 0,7-day Moving Average,1.5102040816326532,8.06738902480899,-434.19197596708176,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 1,7-day Moving Average,6.79591836734694,6.444693054503522,5.1681802790773235,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 10,7-day Moving Average,40.416666666666664,59.28756425017684,-46.69088061899426,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 100,7-day Moving Average,7.095238095238095,7.432246554280181,-4.74978365092873,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 101,7-day Moving Average,66.85714285714286,57.393698078845624,14.15472509574373,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 102,7-day Moving Average,31.15476190476191,28.456485132370087,8.660880736756322,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 103,7-day Moving Average,43.654761904761905,67.8649408308421,-55.45827733271711,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 104,7-day Moving Average,61.32142857142858,70.68178268861489,-15.26440974264512,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 105,7-day Moving Average,7.000000000000001,6.869677993114728,1.861742955503904,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 106,7-day Moving Average,70.70238095238095,234.03030504082025,-231.0076717196313,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 107,7-day Moving Average,30.321428571428573,64.16380113203978,-111.6120649819922,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 108,7-day Moving Average,2.238095238095238,4.9922737099098695,-123.05903810235588,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 11,7-day Moving Average,0.9404761904761904,5.690742847052644,-505.0916444967369,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 110,7-day Moving Average,3.1632653061224496,7.201026331339081,-127.64534853910641,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 112,7-day Moving Average,0.2857142857142857,14.824,-5088.4,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 113,7-day Moving Average,1.5833333333333333,6.762666548839317,-327.11578203195694,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 114,7-day Moving Average,0.0,4.998922416105897,0.0,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 115,7-day Moving Average,0.0,9.893383845831815,0.0,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 116,7-day Moving Average,0.6666666666666666,0.41871177278537136,37.193234082194294,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 12,7-day Moving Average,13.011904761904761,12.62118215363734,3.0028087003168653,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 13,7-day Moving Average,3.4523809523809526,5.181551002534463,-50.086304900998236,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 14,7-day Moving Average,28.666666666666668,48.334645002856824,-68.6092267541517,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 15,7-day Moving Average,10.642857142857144,13.65922376194114,-28.341699776628147,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 16,7-day Moving Average,6.488095238095237,17.38736526198287,-167.98874899202957,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 17,7-day Moving Average,34.404761904761905,32.20154206705062,6.403822365666026,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 18,7-day Moving Average,28.321428571428573,58.256368724539975,-105.69714051539964,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 19,7-day Moving Average,14.142857142857144,15.468468743929677,-9.373011320714877,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 2,7-day Moving Average,80.19047619047619,255.64137927303986,-218.7926938678051,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 20,7-day Moving Average,10.821428571428571,11.040184372460244,-2.0215057521078674,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 22,7-day Moving Average,25.190476190476186,17.975522038538173,28.641594932079073,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 23,7-day Moving Average,6.202380952380952,6.2700297021910885,-1.0906900161327238,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 24,7-day Moving Average,44.666666666666664,80.11152819625376,-79.3541676035532,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 25,7-day Moving Average,16.916666666666668,15.689126140314812,7.256397200109492,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 27,7-day Moving Average,19.76190476190476,66.81233467466905,-238.08651281157833,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 28,7-day Moving Average,69.21428571428568,228.6600753466859,-230.36543393742042,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 29,7-day Moving Average,57.88095238095239,189.63678685484808,-227.632457750046,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 3,7-day Moving Average,80.46428571428574,63.43489210071109,21.16391572037683,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 30,7-day Moving Average,93.98809523809523,155.12062285646226,-65.04284129123282,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 31,7-day Moving Average,21.821428571428573,14.796327567620168,32.193588888156356,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 32,7-day Moving Average,6.285714285714287,8.891503930082326,-41.455744342218786,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 33,7-day Moving Average,54.88095238095238,51.27242684912752,6.575187520027945,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 34,7-day Moving Average,35.13095238095239,33.44188355613458,4.807922103852794,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 35,7-day Moving Average,3.0833333333333335,5.6818406018130405,-84.27591141015266,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 36,7-day Moving Average,10.29761904761905,9.453641438415227,8.195851927528446,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 37,7-day Moving Average,56.440476190476204,70.87942591969421,-25.58261500220022,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 38,7-day Moving Average,31.440476190476204,46.64883224609871,-48.371901123524815,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 39,7-day Moving Average,18.083333333333332,15.113329080148688,16.423986653555637,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 4,7-day Moving Average,73.28571428571429,121.6848972427311,-66.04177011678706,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 40,7-day Moving Average,3.7619047619047623,7.152935139799621,-90.14131384277472,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 41,7-day Moving Average,22.73809523809524,22.23511953139311,2.2120397572240305,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 42,7-day Moving Average,4.666666666666667,6.985311468829017,-49.685245760621775,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 43,7-day Moving Average,3.190476190476191,5.173903723397005,-62.167131628861306,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 44,7-day Moving Average,0.6666666666666666,5.338284500256141,-700.7426750384211,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 46,7-day Moving Average,2.2261904761904763,5.718383355872205,-156.8685571621739,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 47,7-day Moving Average,14.05952380952381,6.483966310492032,53.882034709455496,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 48,7-day Moving Average,6.571428571428572,4.976316186365122,24.273449337922063,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 49,7-day Moving Average,13.27380952380952,10.469987478715803,21.122964285907834,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 5,7-day Moving Average,32.36904761904762,57.222718826299776,-76.78221336554546,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 50,7-day Moving Average,32.6904761904762,35.59308632160715,-8.879069592680272,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 51,7-day Moving Average,35.10714285714286,41.9164387973876,-19.39575649306741,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 52,7-day Moving Average,5.7976190476190474,5.468599208408122,5.675085522323969,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 53,7-day Moving Average,42.60714285714286,43.75110235906261,-2.68490075890636,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 54,7-day Moving Average,68.53571428571428,55.17607901107825,19.49295402239754,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 55,7-day Moving Average,5.845238095238096,4.863672977566534,16.792560057924888,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 56,7-day Moving Average,64.38095238095238,72.56822672636794,-12.716920211074465,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 57,7-day Moving Average,17.964285714285715,15.98466450416074,11.019760215407414,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 58,7-day Moving Average,22.0,21.146699603317444,3.878638166738891,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 59,7-day Moving Average,11.5,8.229924441525025,28.435439638912825,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 6,7-day Moving Average,12.70238095238095,45.23683863960966,-256.12881403254096,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 60,7-day Moving Average,242.2380952380952,455.873751476214,-88.19242738353637,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 61,7-day Moving Average,30.39285714285714,28.808672777915252,5.212357487470369,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 62,7-day Moving Average,76.13095238095237,54.26410009397201,28.722683222929636,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 63,7-day Moving Average,83.3690476190476,111.39037579658788,-33.611189017755,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 64,7-day Moving Average,19.749999999999996,22.296362379533903,-12.892974073589404,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 65,7-day Moving Average,135.17857142857142,197.37441254302766,-46.01013345323051,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 66,7-day Moving Average,242.2380952380952,455.873751476214,-88.19242738353637,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 67,7-day Moving Average,30.39285714285714,28.808672777915252,5.212357487470369,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 68,7-day Moving Average,76.13095238095237,54.26410009397201,28.722683222929636,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 69,7-day Moving Average,83.3690476190476,111.39037579658788,-33.611189017755,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 7,7-day Moving Average,1.1309523809523807,4.39318173876199,-288.4497537431655,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 70,7-day Moving Average,19.749999999999996,22.296362379533903,-12.892974073589404,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 71,7-day Moving Average,135.17857142857142,197.37441254302766,-46.01013345323051,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 72,7-day Moving Average,14.642857142857144,14.496311387660846,1.0008002793893527,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 73,7-day Moving Average,30.333333333333332,42.1067201744261,-38.813363212393746,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 74,7-day Moving Average,72.13095238095238,77.15597211271269,-6.9665234769411795,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 75,7-day Moving Average,111.78571428571429,94.25295417169377,15.684258248964042,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 76,7-day Moving Average,8.428571428571429,6.869733941609784,18.49468204869748,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 77,7-day Moving Average,30.238095238095237,41.30977608885818,-36.61500753795618,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 78,7-day Moving Average,30.03571428571428,42.01957650286907,-39.89870892750704,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 79,7-day Moving Average,2.7261904761904763,6.459142219734243,-136.92923426099406,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 8,7-day Moving Average,1.1309523809523807,4.39318173876199,-288.4497537431655,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 80,7-day Moving Average,92.77380952380952,104.15489626189934,-12.267564301290196,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 81,7-day Moving Average,119.16666666666667,155.1684751668607,-30.211307832330654,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 82,7-day Moving Average,28.6547619047619,47.57154338326737,-66.01618795988614,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 83,7-day Moving Average,5.3690476190476195,5.493576539767723,-2.319385663079532,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 84,7-day Moving Average,5.3690476190476195,5.493576539767723,-2.319385663079532,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 85,7-day Moving Average,4.583333333333333,5.946537912851219,-29.742645371299325,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 86,7-day Moving Average,1.5119047619047619,6.058904970033319,-300.7464704588967,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 87,7-day Moving Average,6.142857142857142,4.7318072091371475,22.97058031637201,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 88,7-day Moving Average,44.63095238095238,34.473533428405595,22.758687437021337,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 89,7-day Moving Average,11.726190476190476,8.164242148650457,30.37600604196565,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 9,7-day Moving Average,1.1309523809523807,4.39318173876199,-288.4497537431655,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 90,7-day Moving Average,6.142857142857142,4.7318072091371475,22.97058031637201,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 91,7-day Moving Average,8.61904761904762,19.14294665990307,-122.10048610937261,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 92,7-day Moving Average,84.95238095238095,311.04199381366084,-266.13687612594606,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 93,7-day Moving Average,1.142857142857143,8.55542715887616,-648.5998764016639,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 94,7-day Moving Average,5.238095238095237,10.163656842864462,-94.03344881832159,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 95,7-day Moving Average,66.09523809523809,132.11833102232285,-99.89084664760664,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 96,7-day Moving Average,1.142857142857143,8.55542715887616,-648.5998764016639,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 97,7-day Moving Average,24.07142857142857,49.89224164197811,-107.26747269664499,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 98,7-day Moving Average,13.05952380952381,9.956723053421257,23.758911897230124,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
-Part 99,7-day Moving Average,6.642857142857143,7.954828707810866,-19.750109579948514,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 0,XGBoost,1.5842032666666668,0.9485527682907339,40.12430170740713,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 1,XGBoost,2.3968656333333334,0.9993462991000316,58.30611924164329,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 10,XGBoost,16.698278714285713,27.952006384098144,-67.39453725960772,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 100,XGBoost,3.2947526857142857,2.9531316977876423,10.368638271633483,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 101,XGBoost,2.3763049,1.1098992528452554,53.293062146812254,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 102,XGBoost,8.864184714285715,15.172688332532752,-71.16845848304712,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 103,XGBoost,26.354320142857144,21.296097152555454,19.1931454231523,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 104,XGBoost,29.571965428571424,20.533500599584727,30.564302027264112,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 105,XGBoost,2.5909264285714286,1.4078607422646157,45.661878826838226,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 106,XGBoost,18.583242857142864,30.592768916540933,-64.62556697838103,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 107,XGBoost,20.469399,20.019943023195815,2.1957458389676443,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 108,XGBoost,1.7465393942857144,1.088477000747466,37.67807331980493,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 11,XGBoost,1.4057911571428572,0.8068124797304339,42.607941753581166,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 110,XGBoost,1.3333333333333333,1.4485515992651008,-8.641369944882566,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 113,XGBoost,1.3912662514285714,1.052853568384904,24.324077630444965,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 114,XGBoost,1.6521703942857144,0.44476042049938885,73.08023300516331,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 115,XGBoost,2.3763049,0.619431454896336,73.93299761758956,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 116,XGBoost,0.5296034428571429,0.27037444909984437,48.947754636712936,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 12,XGBoost,4.222678151428572,3.1333581639603065,25.796898281242157,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 13,XGBoost,2.1343321142857143,0.9381296322654042,56.04575192463132,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 14,XGBoost,13.111602999999997,10.29965301005249,21.446271595833917,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 15,XGBoost,6.380600228571429,6.879490844158573,-7.818866528468314,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 16,XGBoost,8.191393999999999,9.938601854961485,-21.329798749290855,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 17,XGBoost,10.378649142857142,15.978564151152957,-53.95610672656588,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 18,XGBoost,10.094944428571427,6.379173779885818,36.80823282363964,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 19,XGBoost,5.348727614285714,4.961654692060366,7.236728996846464,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 2,XGBoost,45.01899000000001,36.7864447189118,18.28682802765723,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 20,XGBoost,8.940041571428571,8.82742335263967,1.259705761870471,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 22,XGBoost,6.344149714285716,5.777787151665654,8.927320257665576,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 23,XGBoost,1.5699919,1.0729380053399928,31.659647075886642,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 24,XGBoost,28.99465214285714,33.40050263070293,-15.195390053786781,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 25,XGBoost,9.122178957142857,8.19010517301419,10.217666069780767,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 27,XGBoost,22.207255714285715,26.155869333037284,-17.780736483398368,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 28,XGBoost,65.03766142857144,90.23264283228204,-38.73906418265262,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 29,XGBoost,75.14199285714287,65.05659892267329,13.421781284991404,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 3,XGBoost,8.231540685714286,7.472155768895848,9.225307215407911,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 30,XGBoost,16.395702142857147,25.551847426835828,-55.84478910509845,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 31,XGBoost,12.122182357142858,8.912212771985144,26.480129489771908,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 32,XGBoost,4.1228773428571435,2.7551699891423134,33.17361250351951,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 33,XGBoost,17.620605571428573,14.912583931520032,15.368493602169602,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 34,XGBoost,8.644805571428572,16.127221138740204,-86.55389072070417,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 35,XGBoost,1.6718309571428571,1.9386479726014159,-15.959569017345295,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 36,XGBoost,3.249032257142857,4.7234855211755615,-45.381305796246956,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 37,XGBoost,16.59125511428571,17.799938736187848,-7.285064412404919,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 38,XGBoost,13.093321857142858,15.165081834474936,-15.823027952237057,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 39,XGBoost,5.9107622,7.329539468397937,-24.00328790757201,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 4,XGBoost,39.42880571428571,39.19083134340209,0.6035546006847428,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 40,XGBoost,2.0162592,3.9278432823678826,-94.80844934857001,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 41,XGBoost,6.012686057142857,8.65158334769509,-43.888825484532255,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 42,XGBoost,2.332140471428571,4.173109257996354,-78.93901800177942,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 43,XGBoost,1.5506890142857144,0.5357625525864848,65.45003236298348,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 44,XGBoost,2.029406642857143,1.0560804755800202,47.96112059172158,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 46,XGBoost,1.5627871228571428,0.958487365670794,38.66807886678428,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 47,XGBoost,5.385980857142857,4.714868836489024,12.46034916302772,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 48,XGBoost,1.3664561085714284,0.8179128706374472,40.14349487649916,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 49,XGBoost,4.603487842857143,3.9837341615240383,13.462698338494056,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 5,XGBoost,29.59465585714285,21.74482780814234,26.5244782263819,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 50,XGBoost,13.153133714285714,12.787814760771138,2.777429025280876,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 51,XGBoost,6.749195671428572,2.760665654699442,59.096375492768836,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 52,XGBoost,2.728500257142857,2.8336665299343595,-3.8543618427812425,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 53,XGBoost,14.837740385714287,15.90107690763587,-7.166431641743501,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 54,XGBoost,8.321498742857141,13.20880686424128,-58.731104484984975,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 55,XGBoost,1.1318017142857142,1.049353513963611,7.2846859376014175,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 56,XGBoost,24.587941127857142,29.303616767124687,-19.178814585353283,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 57,XGBoost,4.004534857142857,3.621464014097542,9.565926049114907,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 58,XGBoost,10.788916614285714,11.139045223760947,-3.245261984985813,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 59,XGBoost,4.358984,3.925582207499837,9.942725013447243,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 6,XGBoost,9.381382857142858,7.750231499814299,17.387110004647376,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 60,XGBoost,59.30024528571426,118.19800746697248,-99.32127919114528,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 61,XGBoost,8.234507328571429,10.64911139464409,-29.32299371080359,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 62,XGBoost,8.79641358571429,15.93741723238095,-81.18085373184272,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 63,XGBoost,20.00956285714286,24.32238415334228,-21.55380068515521,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 64,XGBoost,8.384438857142856,8.59190915968161,-2.474468549102796,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 65,XGBoost,56.35593057142857,39.43381350438325,30.0272161163186,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 66,XGBoost,59.30024528571426,118.19800746697248,-99.32127919114528,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 67,XGBoost,8.234507328571429,10.64911139464409,-29.32299371080359,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 68,XGBoost,8.79641358571429,15.93741723238095,-81.18085373184272,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 69,XGBoost,20.857665714285712,24.32238415334228,-16.611247329961444,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 7,XGBoost,2.701729242857143,2.821390996666877,-4.429080157684077,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 70,XGBoost,8.384438857142856,8.59190915968161,-2.474468549102796,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 71,XGBoost,56.732002,39.43381350438325,30.4910595180772,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 72,XGBoost,11.584934142857142,12.655384525269326,-9.240021300183104,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 73,XGBoost,27.026059571428572,31.724342994485053,-17.384270950188444,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 74,XGBoost,53.88463857142858,56.723009974726374,-5.267496411867538,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 75,XGBoost,48.21263285714286,47.14156784853984,2.2215443238220343,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 76,XGBoost,3.8298254142857147,4.642998429552778,-21.232639279948085,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 77,XGBoost,26.50951128571429,29.048457653659884,-9.577492170946991,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 78,XGBoost,25.635720285714285,31.44724898087418,-22.669652463006532,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 79,XGBoost,2.662038585714286,3.3805383668512596,-26.990584771865123,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 8,XGBoost,2.701729242857143,2.838208582301131,-5.05155502923964,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 80,XGBoost,52.877414285714295,59.405313167546396,-12.345344359237552,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 81,XGBoost,75.08095142857142,63.5893349733786,15.305635099903366,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 82,XGBoost,21.474480857142854,19.638522356015063,8.549489570161665,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 83,XGBoost,7.627936714285714,9.718664320707095,-27.408822132803422,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 84,XGBoost,7.627936714285714,9.718664320707095,-27.408822132803422,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 85,XGBoost,4.3774723571428575,3.059811453231372,30.100953162192273,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 86,XGBoost,1.3951104428571426,1.4767666187867248,-5.8530259269189395,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 87,XGBoost,2.1349931428571427,2.4600916670184634,-15.227146056603225,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 88,XGBoost,15.227756985714288,17.930447920113085,-17.748450654513924,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 89,XGBoost,2.3010179285714285,1.7904399105359323,22.189223808111965,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 9,XGBoost,2.701729242857143,2.8385086424489496,-5.0626612549508865,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 90,XGBoost,2.1349931428571427,2.4600916670184634,-15.227146056603225,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 91,XGBoost,10.528744857142858,8.245048095645265,21.690113992536336,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 92,XGBoost,111.40542857142859,148.1533522091075,-32.98575671661966,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 93,XGBoost,1.3763049,0.28844235039802446,79.0422637892211,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 94,XGBoost,5.792973714285715,7.877359991117865,-35.981283182624615,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 95,XGBoost,44.8793942857143,36.46871922408657,18.7406162571694,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 96,XGBoost,1.3763049,0.28844235039802446,79.0422637892211,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 97,XGBoost,23.20155857142857,29.336195144634925,-26.440622746615038,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 98,XGBoost,6.805198728571429,6.278144839120542,7.744871391309505,False,CV only; activation requires global CV improvement >=2% and >=8 part rows
+Part 99,XGBoost,3.5613394000000005,3.0712363976850776,13.76176059813122,False,CV only; activation requires global CV improvement >=2% and >=8 part rows

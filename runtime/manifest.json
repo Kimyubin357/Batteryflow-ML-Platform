@@ -1,5 +1,5 @@
 {
-  "dataVersion": "2026-09-27.v4",
+  "dataVersion": "2026-11-05.v5",
   "files": [
     {
       "file": "quality/Test03_OK_chg.csv.gz",
@@ -37,18 +37,32 @@
       "sourceSha256": "7c190681baae053ce7fc0229f8582a2e0653353af8809074a3cdc44076b6cb26"
     },
     {
+      "file": "validation/quality_scores.csv",
+      "bytes": 520995,
+      "sha256": "94093f5670d773f0cc12ef7603bbe35d7ab7c0cbc27fd5233ec1a5d43ae27a1e",
+      "source": "배터리 품질보증 모델/output/models/model_C_pca_t2_spe_이상점수.csv",
+      "sourceSha256": "94093f5670d773f0cc12ef7603bbe35d7ab7c0cbc27fd5233ec1a5d43ae27a1e"
+    },
+    {
+      "file": "validation/quality_folds.csv",
+      "bytes": 367,
+      "sha256": "1197c340a98aa0e6bced72c57bb9f4f1e2713291471eeb7e84dc76897f4af87c",
+      "source": "배터리 품질보증 모델/output/models/model_C_pca_t2_spe_교차검증_fold별.csv",
+      "sourceSha256": "1197c340a98aa0e6bced72c57bb9f4f1e2713291471eeb7e84dc76897f4af87c"
+    },
+    {
       "file": "validation/demand_folds.csv",
-      "bytes": 3926,
-      "sha256": "dfd671f883e8bd344acece7ebd413a9493dcb64a894c0fa3eb986ffadaf2e9d0",
-      "source": "발주량 예측 모델/outputs/audited_v2/source_total/cv_metrics_by_fold.csv",
-      "sourceSha256": "dfd671f883e8bd344acece7ebd413a9493dcb64a894c0fa3eb986ffadaf2e9d0"
+      "bytes": 2636,
+      "sha256": "6334261728eab820996cdd3bcabca4fa1c31720bcb91d39d366ab1334bca8841",
+      "source": "발주량 예측 모델/outputs/audited_v3/source_total/cv_metrics_by_fold.csv",
+      "sourceSha256": "6334261728eab820996cdd3bcabca4fa1c31720bcb91d39d366ab1334bca8841"
     },
     {
       "file": "validation/demand_errors.csv",
-      "bytes": 111733,
-      "sha256": "6efd8e0839f1c9356bedb5118abe4b2d4d9ee391eea3192c03193bc279c00b2d",
-      "source": "발주량 예측 모델/outputs/audited_v2/source_total/final_holdout_part_metrics.csv",
-      "sourceSha256": "6efd8e0839f1c9356bedb5118abe4b2d4d9ee391eea3192c03193bc279c00b2d"
+      "bytes": 110624,
+      "sha256": "390aabe501066d363afa399399e4881581266b4e7d7295f04a4136cc46831db5",
+      "source": "발주량 예측 모델/outputs/audited_v3/source_total/final_holdout_part_metrics.csv",
+      "sourceSha256": "390aabe501066d363afa399399e4881581266b4e7d7295f04a4136cc46831db5"
     },
     {
       "file": "validation/maintenance_features.csv",
@@ -94,80 +108,57 @@
     },
     {
       "file": "demand/metadata.json",
-      "bytes": 6972,
-      "sha256": "887a391366be19dc7a2331867bce31617526ba9848c5eded456d088ce426a6a0",
-      "source": "발주량 예측 모델/models/audited_v2/source_total/deployment/metadata.json",
-      "sourceSha256": "887a391366be19dc7a2331867bce31617526ba9848c5eded456d088ce426a6a0"
+      "bytes": 15352,
+      "sha256": "faadd9ee726be87fe191a951933e6fcd8cc1dfe0d97c7f0b6582fc28fbbc0845",
+      "source": "발주량 예측 모델/models/audited_v3/source_total/deployment/metadata.json",
+      "sourceSha256": "faadd9ee726be87fe191a951933e6fcd8cc1dfe0d97c7f0b6582fc28fbbc0845"
     },
     {
       "file": "demand/xgboost.joblib",
-      "bytes": 433136,
-      "sha256": "2a16100cb13f86ff9dde7cbf993171a6de03ed69219add358edcbf4d3cb7ea71",
-      "source": "발주량 예측 모델/models/audited_v2/source_total/deployment/xgboost.joblib",
-      "sourceSha256": "2a16100cb13f86ff9dde7cbf993171a6de03ed69219add358edcbf4d3cb7ea71"
-    },
-    {
-      "file": "demand/lstm.pt",
-      "bytes": 22793,
-      "sha256": "11fb481e38263b7b4eed53e199f6af2d1644d204586761933a8d05e302fc7713",
-      "source": "발주량 예측 모델/models/audited_v2/source_total/deployment/lstm.pt",
-      "sourceSha256": "11fb481e38263b7b4eed53e199f6af2d1644d204586761933a8d05e302fc7713"
+      "bytes": 448751,
+      "sha256": "127155995991a39d57f5ad5a4459e0c70e4746f6a7b7d26d4901a80a6e6de5cf",
+      "source": "발주량 예측 모델/models/audited_v3/source_total/deployment/xgboost.joblib",
+      "sourceSha256": "127155995991a39d57f5ad5a4459e0c70e4746f6a7b7d26d4901a80a6e6de5cf"
     },
     {
       "file": "demand/input_template.csv",
-      "bytes": 303,
-      "sha256": "80a50ef6717999e8418f7bb28b7687a27b056a7a9023ddd41264670f7b9e0b56",
+      "bytes": 326,
+      "sha256": "2ae2763b91cd333a396da91a728c8af05e8ed1f5197bebe95db5c95b4af22491",
       "source": "발주량 예측 모델/outputs/dashboard_data/inference_input_template.csv",
-      "sourceSha256": "80a50ef6717999e8418f7bb28b7687a27b056a7a9023ddd41264670f7b9e0b56"
+      "sourceSha256": "2ae2763b91cd333a396da91a728c8af05e8ed1f5197bebe95db5c95b4af22491"
     },
     {
       "file": "quality/pca_frozen.json",
       "bytes": 5254,
       "sha256": "f4ae59faae180ffc74a73fe63602e5bb47d7b985f62cc24d0e07af7fd93a5fbb",
-      "source": "scripts/package_quality.py"
+      "source": "runtime/quality/pca_frozen.json",
+      "sourceSha256": "f4ae59faae180ffc74a73fe63602e5bb47d7b985f62cc24d0e07af7fd93a5fbb"
     },
     {
       "file": "quality/exploration.json",
       "bytes": 94967,
       "sha256": "d899cbcc2a1d512def288af4ad9a9602f8afca99409c0e18c460ffe7519d0507",
-      "source": "scripts/package_quality.py"
-    },
-    {
-      "file": "validation/quality_scores.csv",
-      "bytes": 520995,
-      "sha256": "94093f5670d773f0cc12ef7603bbe35d7ab7c0cbc27fd5233ec1a5d43ae27a1e",
-      "source": "배터리 품질보증 모델/output/models/model_C_pca_t2_spe_이상점수.csv",
-      "sourceSha256": "94093f5670d773f0cc12ef7603bbe35d7ab7c0cbc27fd5233ec1a5d43ae27a1e"
-    },
-    {
-      "file": "validation/quality_folds.csv",
-      "bytes": 367,
-      "sha256": "1197c340a98aa0e6bced72c57bb9f4f1e2713291471eeb7e84dc76897f4af87c",
-      "source": "배터리 품질보증 모델/output/models/model_C_pca_t2_spe_교차검증_fold별.csv",
-      "sourceSha256": "1197c340a98aa0e6bced72c57bb9f4f1e2713291471eeb7e84dc76897f4af87c"
+      "source": "runtime/quality/exploration.json",
+      "sourceSha256": "d899cbcc2a1d512def288af4ad9a9602f8afca99409c0e18c460ffe7519d0507"
     },
     {
       "file": "maintenance/frozen.json",
       "bytes": 3022,
       "sha256": "e3cb15c644d2dfc1e541dc896e2edfba4d018954423efad77f776332dfd327fa",
-      "source": "scripts/package_maintenance.py"
+      "source": "runtime/maintenance/frozen.json",
+      "sourceSha256": "e3cb15c644d2dfc1e541dc896e2edfba4d018954423efad77f776332dfd327fa"
     },
     {
       "file": "maintenance/sample.csv",
       "bytes": 110973,
       "sha256": "a5ff4dc99f39f3a9d51c263a4a61c53d1eecd0e333cff1585dc10022a5001ef1",
-      "source": "scripts/package_maintenance.py"
+      "source": "runtime/maintenance/sample.csv",
+      "sourceSha256": "a5ff4dc99f39f3a9d51c263a4a61c53d1eecd0e333cff1585dc10022a5001ef1"
     },
     {
       "file": "demand/evidence.json",
-      "bytes": 803291,
-      "sha256": "67b6bda6854da47ca0d04b0a5f261d77bce49918fb6d91ab6b9d639e8bde877b"
-    },
-    {
-      "file": "quality/defect_calibration.json",
-      "bytes": 32750,
-      "sha256": "b0a920c5d2f803b32dfd0b1f445267c8200f179984e18cce2e22510682e9de78",
-      "source": "tools/calibrate_pack_defects.py / normal reference stored metrics"
+      "bytes": 763051,
+      "sha256": "292dd2f096acc91b70d2645d7f936f036e004de8460b08fbc59dbca75b7c8211"
     }
   ]
 }
