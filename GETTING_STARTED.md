@@ -70,7 +70,7 @@ v3 신뢰구간을 재계산하는 명령은 `python "발주량 예측 모델/sr
 
 `test_audited_v2.py`와 `portfolio_notes/evidence/review_portfolio_evidence.py`는 **v2 당시 검사·증거 생성 도구**입니다. 특히 후자는 v2 평가와 현재 시드 조회를 함께 읽으므로 최신 v3 근거를 만드는 용도로 실행하지 않습니다. `retrain_audited.py`와 패키징·DB 이전 도구도 앱 실행에 필요하지 않습니다.
 
-Copilot의 [현재 근거 5개](docs/copilot/README.md)와 평가기 교체는 로컬에 반영됐습니다. 이 변경의 게시·라이브 재배포는 아직 하지 않았습니다. CSV 입력 처리·연속 누락일 보간·화면 표시의 알려진 보완 사항은 [발주량 모델 한계](<발주량 예측 모델/README.md#한계>)에 남겨 두었으며 문서 수정이 기능 수정 완료를 뜻하지 않습니다.
+Copilot의 [현재 근거 5개](docs/copilot/README.md)와 평가기 교체는 로컬에 반영됐습니다. 2026-11-05 Cloud Run 재배포(빌드 zip: main `225744f`)로 라이브에도 반영했습니다. 같은 배포에 CSV `carryover_days` 사전 검사, 결과 화면의 중복 비교 줄 제거, 계획 이력의 이월·보간 표시, 연속 누락일 보간 수정이 포함됩니다.
 
 ## 5. 공개 서비스와 포트폴리오 모드 배포 조건
 

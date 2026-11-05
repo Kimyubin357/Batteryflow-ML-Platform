@@ -5,7 +5,7 @@
 현재 공식 로컬 시드는 **`2026-11-05.v5` / schemaVersion 3 / 275개 문서**다. 발주 audited_v3의 XGBoost 예측과 기존 D+3 계획 비교를 반영했다. 개인 프로젝트 `ls-battery-project`에 반영한 뒤 **2026-11-05 11:34 KST에 275개 전체 일치**를 검증했다. 이는 그 시점의 검증 기록이며 현재 서버의 실시간 상태는 별도로 조회해야 한다.
 현재 변경 내역과 계약은 [SEED_V5.md](SEED_V5.md), 배포 이력은 [DEPLOYMENT_STATUS.md](DEPLOYMENT_STATUS.md)를 확인한다. 과거 예지보전 변경은 [SEED_V4.md](SEED_V4.md), 과거 발주 v2 필드 설명은 [SEED_V3.md](SEED_V3.md)에 보존했다. 이전 259개 문서는 `versions/seed-v1`에 있다.
 
-Copilot 근거 5개로의 교체는 로컬 코드 변경이며 아직 라이브에 배포하지 않았다. 이번 정리는 문서 수정만 수행했고 Firestore·Cloud Run은 변경하지 않았다.
+Copilot 근거 5개로의 교체는 2026-11-05 Cloud Run 재배포로 라이브에 반영했다. 이 재배포에서 Firestore 공식 자료는 바꾸지 않았다.
 
 ## 데이터 구조
 
