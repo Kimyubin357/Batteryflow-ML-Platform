@@ -1,6 +1,6 @@
 # 현재 실행 안내
 
-서비스 버전은 audited_v3입니다(`src/service_policy.py`). audited_v2는 과거 기록으로 보존합니다. [README](../README.md)의 재현 순서와 [학습 계약](TRAINING_PLAN_V2.md)을 사용하세요. 신규 부품은 최근값 대체, Part 21·26은 격리 오류를 반환합니다. 완료 버전 덮어쓰기 오류는 정상 보호 동작입니다.
+서비스 버전은 audited_v3입니다(`src/service_policy.py`). audited_v2는 과거 기록으로 보존합니다. [README](../README.md)의 재현 순서와 [현재 CSV 입력 계약](../../docs/copilot/demand-contract.md)을 사용하세요. 수량은 행 날짜에 맞춰 미리 정렬해야 하며 `carryover_days`만으로 자동 정렬되지 않습니다. 신규 부품은 최근값 대체, Part 21·26은 격리 오류를 반환합니다. 완료 버전 덮어쓰기 오류는 정상 보호 동작입니다.
 
 아래는 이전 버전의 실행 기록입니다. 현재 재학습 명령으로 사용하지 않습니다.
 

@@ -13,20 +13,34 @@ from backend.copilot import Copilot
 from backend.data import Repository
 
 
+def mentions_number(text, value, tolerance=.005):
+    numbers=re.findall(r'(?<![\d.])-?\d+(?:\.\d+)?(?![\d.])',text.replace('−','-').replace(',',''))
+    return any(abs(float(number)-float(value))<=tolerance for number in numbers)
+
+
 def validate(name,result):
     text=result.get('text','').replace(',','')
     facts=result.get('context',{})
     if result.get('status')!='answered' or not result.get('citations'):return False
     if name in ('part_lookup','followup'):
-        return facts.get('part')=='Part 92' and all(value in text for value in ('Part 92','642.29','102','540.29'))
+        return facts.get('part')=='Part 92' and 'Part 92' in text and all(
+            key in facts and mentions_number(text,facts[key]) for key in ('forecast','plan','gap'))
     if name=='ranked_parts':
-        return re.findall(r'Part\s+\d+',text)==[r['part'] for r in facts['matches'][:3]] and '-284.86' in text
+        rows=facts.get('rankedResults',facts.get('matches',[])[:3])
+        return bool(rows) and re.findall(r'Part\s+\d+',text)==[r['part'] for r in rows] and all(
+            mentions_number(text,row[key]) for row in rows for key in ('forecast','plan','gap'))
     if name=='zero_power':
         return facts.get('zeroPowerRows')==39 and all(value in text for value in ('39','EVT-003','78','116'))
     if name=='defect_type':
         return '용량' in text and '확정' in text and bool(re.search('아닙|없|불가',text))
     if name=='model_rationale':
-        return all(value in text for value in ('7일','34.66','69.70','35.70','ERP')) and any(c['id'].startswith('S') and c['id']!='SCREEN' for c in result['citations'])
+        metrics={row['Model']:row for row in facts.get('validation',[])}
+        primary,reference=facts.get('primaryModel'),facts.get('auxiliaryModel')
+        return bool(primary and reference and primary in metrics and reference in metrics) and (
+            primary in text and 'ERP' in text
+            and all(mentions_number(text,metrics[model]['MAE'],.051) for model in (primary,reference))
+            and any(word in text for word in ('미확정','불확실','단정','0을 포함','확정할 수 없','확정되지'))
+            and any(c['id'].startswith('S') and c['id']!='SCREEN' for c in result['citations']))
     return False
 
 
@@ -41,7 +55,7 @@ def main():
         ('ranked_parts','계획과 차이가 큰 부품 3개를 찾아줘',{'track':'overview'},['Part 92']),
         ('zero_power','WeldingTest_04_NG에서 출력 0W 구간과 점검 이벤트를 찾아줘',{'track':'quality'},['39']),
         ('defect_type','Test08의 불량 유형 근거와 확정 진단 가능 여부를 알려줘',{'track':'demand'},['용량']),
-        ('model_rationale','왜 발주량 기본 모델이 7일 이동평균이야? 재학습 검증 결과와 한계를 설명해줘',{'track':'demand'},['7']),
+        ('model_rationale','현재 발주량 기본 모델과 기존 계획의 CV MAE를 비교하고, 모델 선정 이유와 개선을 확정할 수 있는지 ERP 예측 대상과 함께 설명해줘',{'track':'demand'},['XGBoost']),
         ('followup','그 부품의 기존 계획과 차이를 다시 알려줘',{'track':'quality'},['Part 92'])]
     results=[];first=None
     if args.case:
