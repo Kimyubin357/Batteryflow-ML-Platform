@@ -1,1 +1,1 @@
-제조 데이터 기반 발주 계획 검토 ML 플랫폼 | 시간 누수 검증·LSTM/이동평균 비교·근거 기반 AI Copilot | FastAPI·Dash·Firebase | 김유빈 개인 포트폴리오
+제조 데이터 기반 발주 계획 검토 ML 플랫폼 | 시간 누수·휴일 이월 기록 검증·XGBoost와 기존 계획 비교·근거 기반 AI Copilot | FastAPI·Dash·Firebase | 김유빈 개인 포트폴리오
