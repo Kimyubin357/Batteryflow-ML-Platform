@@ -57,14 +57,20 @@ GEMINI_API_KEY=본인의_Gemini_키
 .venv\Scripts\python.exe -B -m unittest discover -s backend/tests -q
 ```
 
-발주량 연구 검사는 별도 연구 의존성이 필요합니다. 원본 공급망 데이터, 저장된 예측과 모델을 비교하며 재학습하지 않습니다.
+발주량 연구 검사는 별도 연구 의존성이 필요합니다. 현재 이월 처리 검사는 원본 공급망 데이터와 처리 결과를 비교하며 재학습하지 않습니다.
 
 ```powershell
 .venv\Scripts\python.exe -m pip install -r "발주량 예측 모델/requirements.txt"
-.venv\Scripts\python.exe -B -m unittest discover -s "발주량 예측 모델/tests" -p test_audited_v2.py -q
+.venv\Scripts\python.exe -B -m unittest discover -s "발주량 예측 모델/tests" -p test_carryover.py -q
 ```
 
-신뢰구간과 순위 근거를 다시 만들려면 `portfolio_notes/evidence/review_portfolio_evidence.py`를 실행합니다. 결과 JSON/CSV를 갱신하므로 비교할 기존 근거를 먼저 보존합니다. `retrain_audited.py`와 패키징·DB 이전 도구는 앱 실행에 필요하지 않으며 현재 산출물을 바꿀 수 있어 별도의 연구 작업에서 실행합니다.
+현재 v3 평가 근거는 [CV 7일 비교표](<발주량 예측 모델/outputs/audited_v3/source_total/cv_metrics_pooled.csv>), [회고 6일 비교표](<발주량 예측 모델/outputs/audited_v3/source_total/final_holdout_metrics.csv>), [날짜별 계획 비교](<발주량 예측 모델/outputs/audited_v3/plan_comparison.json>)입니다. 저장된 학습계획 설명의 정정은 [DOCUMENTATION_ERRATA.md](<발주량 예측 모델/outputs/audited_v3/DOCUMENTATION_ERRATA.md>)를 함께 읽습니다.
+
+v3 신뢰구간을 재계산하는 명령은 `python "발주량 예측 모델/src/compare_against_plan.py" --version audited_v3`입니다. 재학습하지 않지만 저장된 `plan_comparison.json`을 덮어쓰므로 기존 근거를 보존한 별도 연구 작업에서 실행합니다. 현재 순위는 [v3 순위 기록](portfolio_notes/evidence/ranking_v3_2021-11-01.json)과 `backend.tests.test_copilot_search`로 확인합니다.
+
+`test_audited_v2.py`와 `portfolio_notes/evidence/review_portfolio_evidence.py`는 **v2 당시 검사·증거 생성 도구**입니다. 특히 후자는 v2 평가와 현재 시드 조회를 함께 읽으므로 최신 v3 근거를 만드는 용도로 실행하지 않습니다. `retrain_audited.py`와 패키징·DB 이전 도구도 앱 실행에 필요하지 않습니다.
+
+Copilot의 [현재 근거 5개](docs/copilot/README.md)와 평가기 교체는 로컬에 반영됐습니다. 이 변경의 게시·라이브 재배포는 아직 하지 않았습니다. CSV 입력 처리·연속 누락일 보간·화면 표시의 알려진 보완 사항은 [발주량 모델 한계](<발주량 예측 모델/README.md#한계>)에 남겨 두었으며 문서 수정이 기능 수정 완료를 뜻하지 않습니다.
 
 ## 5. 공개 서비스와 포트폴리오 모드 배포 조건
 

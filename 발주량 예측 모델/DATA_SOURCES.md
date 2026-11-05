@@ -1,8 +1,8 @@
-# audited_v2 원본 해석
+# audited_v3 데이터 출처와 해석
 
-원본 Total은 ERP 일별 최종 발주 계획량입니다. 실측 소비량으로 해석하지 않습니다. 17,364행·84열·117부품 중 Part 21·26의 상충 스냅샷을 격리하여 115부품·5,380일별 행을 사용합니다. 2021-10-31은 관측이 없으며 0으로 보간하지 않습니다. Total과 시간대 합계의 불일치는 별도 민감도 분석으로 보고하고 정답 정의를 성능에 맞춰 바꾸지 않습니다. [현재 결과](docs/RETRAINING_REPORT_2026-09-27.md)
+원본 Total은 ERP 일별 발주 계획량이며, 정답은 관측된 일별 최종 계획량입니다. 실측 소비량으로 해석하지 않습니다. 17,364행·84열·117부품 중 Part 21·26의 상충 스냅숏을 격리하면 115부품·5,380개 일별 행입니다. audited_v3는 이월 의심일의 기준일을 보정하고 원본 로그가 없는 2021-10-31을 이월값으로 보간해 5,488행을 구성합니다. 0으로 채우지 않으며 이월·보간일은 관측 정답으로 사용하지 않습니다.
 
-아래는 기존 출처 기록입니다.
+공통 부품의 90% 이상에서 수량 82개 칸이 직전 관측일과 동일한 17개 관측일을 이월 의심일로 분류했습니다. 이전 계획 기준일이 유지됐다는 보정 가정이며 제공자의 운영 기록으로 확인한 사실은 아닙니다. 정답 날짜는 32일, 평가 범위는 CV 7일과 회고 6일입니다. Total과 시간대 합계의 불일치는 별도 민감도 분석으로 보고하고 정답 정의를 성능에 맞춰 바꾸지 않습니다. [현재 결과와 한계](README.md) · [학습 기록 정정](outputs/audited_v3/DOCUMENTATION_ERRATA.md)
 
 # 데이터 출처
 
@@ -17,7 +17,7 @@
 - 시간 필드: CRET_TIME
 - 수량 단위: 개수
 
-원본 파일은 수정하지 않는다. 공식 dashboard와 추론은 원본 Total 값을 사용한다. 시간대별 합계는 민감도 분석으로 별도 평가했으며 모델 순위는 동일했다. 동일 부품에 하루 여러 로그가 있으면 CRET_TIME 기준 마지막 로그를 일별 대표값으로 사용한다. 계획량과 실제량의 0은 결측치가 아니므로 유지한다.
+원본 파일은 수정하지 않는다. 주 분석은 원본 Total, 시간대별 합계는 별도 민감도 분석으로 사용하며 두 정의에서 선택 모델은 XGBoost로 같았다. 동일 부품에 하루 여러 로그가 있으면 CRET_TIME 기준 마지막 로그를 일별 대표값으로 선택한 뒤 이월 여부와 추정 기준일을 반영한다. 계획량과 관측 최종량의 0은 결측치가 아니므로 유지한다.
 
 ## 문서
 
@@ -26,8 +26,9 @@
 
 ## 파생 데이터
 
-- `outputs/purged_evaluation/source_total/final_holdout_predictions.csv`: 독립 최종 holdout의 실제값과 모델별 예측값
-- `outputs/purged_evaluation/source_total/cv_predictions.csv`: 누수 제거 expanding walk-forward 예측값
-- `outputs/dashboard_data`: 원본과 모델 산출물에서 생성한 대시보드용 데이터
+- `outputs/audited_v3/source_total/cv_predictions.csv`: CV 7일·743건의 관측 정답과 모델별 예측값
+- `outputs/audited_v3/source_total/final_holdout_predictions.csv`: 이전 실험에서 관측한 회고 6일·643건의 정답과 예측값. 새로운 독립 시험이 아님
+- `outputs/audited_v3/daily_history.csv`: 기준일 정렬과 이월·보간 표시를 포함한 일별 자료
+- `outputs/dashboard_data`: 현재 서비스 정책을 따라 생성한 대시보드용 자료
 
-파생 데이터는 `src/build_dashboard_assets.py`로 다시 만들 수 있다. Firestore용 파일에는 원본 84개 열 전체를 복제하지 않고 대시보드 조회에 필요한 날짜, 부품, 실제 수량, 계획 수량, 예측값과 평가 지표만 포함한다.
+대시보드용 파생 데이터는 완료된 학습 산출물을 바탕으로 `src/build_dashboard_assets.py`에서 생성한다. 이 명령은 파일을 변경하므로 단순 열람에 필요하지 않다. 공식 Firestore 입력은 루트 `firestore/seed`의 v5 자료다. 연구용 평면 JSONL을 공식 시드와 중복 업로드하지 않는다. 이전 `purged_evaluation`·`audited_v2` 결과는 실험 이력으로 보존한다.

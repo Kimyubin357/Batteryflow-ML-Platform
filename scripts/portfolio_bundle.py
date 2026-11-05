@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def files():
     selected = set()
-    roots = ['backend', 'frontend', 'runtime', 'firestore',
+    roots = ['backend', 'frontend', 'runtime', 'firestore', 'docs/copilot',
              'portfolio_notes/assets', 'portfolio_notes/evidence',
              '발주량 예측 모델/src', '발주량 예측 모델/docs',
              '발주량 예측 모델/models/audited_v2', '발주량 예측 모델/models/audited_v3', '발주량 예측 모델/outputs',

@@ -2,9 +2,10 @@
 
 이 디렉터리는 발주량 예측, 배터리 용접 예지보전, 배터리 품질보증, 통합 현황 화면에 필요한 데이터를 하나의 Firestore 구조로 생성하고 배포한다.
 
-현재 공식 로컬 시드는 **`2026-09-27.v4` / schemaVersion 3 / 275개 문서**다. 예지보전 재학습과 경보 정책 갱신 내용은 [SEED_V4.md](SEED_V4.md)를 참고한다. 2026-09-28 원격 Firestore에 반영하고 275개 전체 일치를 검증했다.
-이전 259개 문서는 `versions/seed-v1`에 보존한다. 최신 원격 비교 결과는 `DEPLOYMENT_STATUS.md`를 확인한다.
-최신 변경 내역은 `SEED_V4.md`, 수요 재학습 필드 계약은 `SEED_V3.md`에 정리했다.
+현재 공식 로컬 시드는 **`2026-11-05.v5` / schemaVersion 3 / 275개 문서**다. 발주 audited_v3의 XGBoost 예측과 기존 D+3 계획 비교를 반영했다. 개인 프로젝트 `ls-battery-project`에 반영한 뒤 **2026-11-05 11:34 KST에 275개 전체 일치**를 검증했다. 이는 그 시점의 검증 기록이며 현재 서버의 실시간 상태는 별도로 조회해야 한다.
+현재 변경 내역과 계약은 [SEED_V5.md](SEED_V5.md), 배포 이력은 [DEPLOYMENT_STATUS.md](DEPLOYMENT_STATUS.md)를 확인한다. 과거 예지보전 변경은 [SEED_V4.md](SEED_V4.md), 과거 발주 v2 필드 설명은 [SEED_V3.md](SEED_V3.md)에 보존했다. 이전 259개 문서는 `versions/seed-v1`에 있다.
+
+Copilot 근거 5개로의 교체는 로컬 코드 변경이며 아직 라이브에 배포하지 않았다. 이번 정리는 문서 수정만 수행했고 Firestore·Cloud Run은 변경하지 않았다.
 
 ## 데이터 구조
 
@@ -56,7 +57,7 @@ $env:GOOGLE_APPLICATION_CREDENTIALS = 'C:\secure\firebase-service-account.json'
 로컬 `.local/settings.json`의 기존 프로젝트·서비스 계정 경로를 사용합니다. 인증 프로젝트와 지정 대상이 일치해야 합니다. 공식 워크스페이스만 읽으며 다른 루트의 문서는 조회하지 않습니다.
 
 ```powershell
-.\.venv\Scripts\python.exe firestore/sync_official_seed.py --project-id ls-proejct-team1
+.\.venv\Scripts\python.exe firestore/sync_official_seed.py --project-id YOUR_PROJECT_ID
 ```
 
 ## 4. 공식 데이터 변경분 동기화 (권장)
@@ -64,7 +65,7 @@ $env:GOOGLE_APPLICATION_CREDENTIALS = 'C:\secure\firebase-service-account.json'
 신규·변경 문서만 쓰며 폐기 문서 정리는 보관된 이전 공식 시드에 존재하는 경로로 제한합니다. 알 수 없는 추가 문서는 보존합니다. 반영 전 `.local/firestore-deployments`에 백업하고 반영 후 모든 공식 문서를 비교합니다. 500개 변경·9MB를 넘는 경우 자동 분할하지 않고 쓰기 전에 중단합니다.
 
 ```powershell
-.\.venv\Scripts\python.exe firestore/sync_official_seed.py --project-id ls-proejct-team1 --apply
+.\.venv\Scripts\python.exe firestore/sync_official_seed.py --project-id YOUR_PROJECT_ID --apply
 ```
 
 기존 `deploy_firestore.py --replace-seed-roots`는 삭제 후 재적재하는 과거 방식입니다. 최신 일반 배포에는 위 동기화 도구를 사용하세요.

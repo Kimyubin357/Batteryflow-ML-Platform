@@ -23,15 +23,11 @@ except ImportError:
 from backend.settings import ROOT, settings
 
 SOURCES = {
-    'seed-v4': ('공식 시드 v4 · 현재 예지보전 정책', 'firestore/SEED_V4.md'),
-    'seed-v3': ('공식 시드 v3 · 재학습 데이터 계약', 'firestore/SEED_V3.md'),
-    'demand-validation': ('발주량 · v3 재평가 결과와 한계', '발주량 예측 모델/README.md'),
-    'demand-contract': ('발주량 · 학습 및 입력 계약', '발주량 예측 모델/docs/TRAINING_PLAN_V2.md'),
-    'maintenance-model': ('예지보전 · 모델 카드', '배터리 예지보전 모델/MODEL_CARD.md'),
-    'maintenance-dictionary': ('예지보전 · 데이터 사전', '배터리 예지보전 모델/DATA_DICTIONARY.md'),
-    'maintenance-validation': ('예지보전 · 최종 검증', '배터리 예지보전 모델/outputs/track_b_final_v2/final_validation_report.md'),
-    'quality-validation': ('품질 · 최신 4종 모델 비교', '배터리 품질보증 모델/output/models/모델4종_비교결과.md'),
-    'quality-details': ('품질 · 정상 10개 파일 학습 평가', '배터리 품질보증 모델/output/models/모델별_결과_train10.md'),
+    'service-policy': ('현재 운영 정책 · 공식 자료 2026-11-05.v5', 'docs/copilot/service-policy.md'),
+    'demand-validation': ('발주량 audited_v3 · XGBoost 평가와 개선 미확정', 'docs/copilot/demand-validation.md'),
+    'demand-contract': ('발주량 audited_v3 · 날짜 정렬과 CSV 입력 계약', 'docs/copilot/demand-contract.md'),
+    'maintenance-current': ('현재 예지보전 · 이상 탐지 정책과 검증 한계', 'docs/copilot/maintenance.md'),
+    'quality-current': ('현재 품질 · 저장 팩 분석과 시험 모델의 범위', 'docs/copilot/quality.md'),
 }
 
 
@@ -106,7 +102,7 @@ class Copilot:
         for score,i in zip(scores[0],indexes[0]):
             if i<0 or score<.20:continue
             chunk=self._chunks[int(i)]
-            # Versioned documents remain in the corpus, but matching domain and
+            # Only current policy documents are indexed. Matching domain and
             # literal model/entity names improve ranking over vector similarity alone.
             lexical=sum(t in (chunk['title']+' '+chunk['text']).lower() for t in tokens)
             rank=float(score)+min(lexical,5)*.035+(.18 if track and chunk['source'].startswith(track) else 0)

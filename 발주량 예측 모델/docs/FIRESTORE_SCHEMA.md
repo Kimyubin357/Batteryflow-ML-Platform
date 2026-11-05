@@ -1,6 +1,8 @@
 # 현재 공식 업로드 구조
 
-공식 업로드 입력은 루트 `firestore/seed`의 v3 / 269문서입니다. [SEED_V3.md](../../firestore/SEED_V3.md)를 사용하세요. 아래 평면 구조는 연구용 내보내기 파일이며 공식 시드와 중복 업로드하지 않습니다. 현재 발주 정책은 7일 이동평균/LSTM, 마지막 기간 성능은 회고 평가입니다.
+공식 업로드 입력은 루트 `firestore/seed`의 **2026-11-05.v5 / schemaVersion 3 / 275문서**입니다. [현재 시드 계약](../../firestore/SEED_V5.md)을 사용하세요. 발주 모델은 audited_v3이며 XGBoost 예측을 기존 D+3 계획과 비교합니다. CV는 7일, 마지막 6일 성능은 이미 관측한 기간의 회고 평가입니다. 기존 계획 대비 개선은 미확정입니다.
+
+아래 평면 구조는 연구용 내보내기 파일 설명입니다. 현재 공식 시드와 중복 업로드하지 않으며, 아래 저장안은 구현 완료된 기능을 뜻하지 않습니다. CSV 업로드 결과는 공식 시드나 검토 기록으로 자동 저장되지 않습니다.
 
 ---
 
@@ -53,4 +55,4 @@
 
 ## 추론 결과 저장안
 
-실제 Firestore 연결 시 `inference_results` 컬렉션을 추가한다. 문서에는 `part_number`, `origin_date`, `target_date`, `xgboost_prediction`, `moving_average_3d`, `recommended_model`, `recommended_forecast`, `model_version`, `created_at`을 저장한다. 현재 로컬 Dash는 결과를 DB에 기록하지 않는다.
+과거 설계안에서는 `inference_results` 컬렉션과 `part_number`, `origin_date`, `target_date`, `xgboost_prediction`, `moving_average_3d`, `recommended_model`, `recommended_forecast`, `model_version`, `created_at` 필드를 제안했다. 현재 서비스의 CSV 추론 결과를 DB에 기록하는 기능으로 구현됐다는 의미는 아니다. 공식 분석 대상에 대한 검토 기록은 별도 경로로 저장한다.
