@@ -1,0 +1,622 @@
+{
+  "version": "audited_v3",
+  "selection": {
+    "overall_method": "XGBoost",
+    "ml_model": "XGBoost",
+    "overall_cv_mae": 15.940665909250844,
+    "ml_cv_mae": 15.940665909250844,
+    "selection_basis": "nested_purged_walk_forward_global_policy",
+    "final_holdout_is_selection_independent": false,
+    "evaluation_label": "retrospective_previously_observed_period",
+    "new_unseen_validation_available": false
+  },
+  "quality": {
+    "source_rows": 17364,
+    "source_columns": 84,
+    "source_parts": 117,
+    "source_missing_cells": 0,
+    "quantity_source": "source_total",
+    "conflict_policy": "quarantine",
+    "quarantined_parts": [
+      "Part 21",
+      "Part 26"
+    ],
+    "conflicting_timestamp_groups": 306,
+    "conflict_rows": 612,
+    "daily_rows": 5380,
+    "daily_parts": 115,
+    "observed_dates": 49,
+    "total_slot_mismatch_rows": {
+      "actual_d": 31,
+      "plan_d1": 0,
+      "plan_d2": 0,
+      "plan_d3": 149,
+      "plan_d4": 136
+    },
+    "forecast_as_of": "after the final daily source snapshot; not an intraday forecast",
+    "target_definition": "final daily ERP order-plan quantity, not independently measured consumption",
+    "carryover_policy": "realign",
+    "carryover_identical_share_threshold": 0.9,
+    "carryover_dates": [
+      "2021-09-18",
+      "2021-09-19",
+      "2021-09-20",
+      "2021-09-21",
+      "2021-09-22",
+      "2021-09-23",
+      "2021-09-24",
+      "2021-09-25",
+      "2021-09-26",
+      "2021-10-03",
+      "2021-10-09",
+      "2021-10-10",
+      "2021-10-11",
+      "2021-10-17",
+      "2021-10-23",
+      "2021-10-24",
+      "2021-10-30",
+      "2021-10-31"
+    ],
+    "calendar_gap_dates": [
+      "2021-10-31"
+    ],
+    "label_days": 32,
+    "daily_rows_with_fill": 5488,
+    "carryover_flags": [
+      {
+        "date": "2021-09-13",
+        "carried_over": false,
+        "identical_share": NaN,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-14",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-15",
+        "carried_over": false,
+        "identical_share": 0.009433962264150943,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-16",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-17",
+        "carried_over": false,
+        "identical_share": 0.00909090909090909,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-18",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-19",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-20",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-21",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-22",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-23",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-24",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-25",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-26",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-27",
+        "carried_over": false,
+        "identical_share": 0.01818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-28",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-29",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-30",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-01",
+        "carried_over": false,
+        "identical_share": 0.026785714285714284,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-02",
+        "carried_over": false,
+        "identical_share": 0.008928571428571428,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-03",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-04",
+        "carried_over": false,
+        "identical_share": 0.008928571428571428,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-05",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-06",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-07",
+        "carried_over": false,
+        "identical_share": 0.008928571428571428,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-08",
+        "carried_over": false,
+        "identical_share": 0.03571428571428571,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-09",
+        "carried_over": true,
+        "identical_share": 0.9821428571428571,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-10",
+        "carried_over": true,
+        "identical_share": 0.9821428571428571,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-11",
+        "carried_over": true,
+        "identical_share": 0.9821428571428571,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-12",
+        "carried_over": false,
+        "identical_share": 0.017857142857142856,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-13",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-14",
+        "carried_over": false,
+        "identical_share": 0.00909090909090909,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-15",
+        "carried_over": false,
+        "identical_share": 0.03669724770642202,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-16",
+        "carried_over": false,
+        "identical_share": 0.037037037037037035,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-17",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-18",
+        "carried_over": false,
+        "identical_share": 0.009615384615384616,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-19",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-20",
+        "carried_over": false,
+        "identical_share": 0.018867924528301886,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-21",
+        "carried_over": false,
+        "identical_share": 0.009433962264150943,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-22",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-23",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-24",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-25",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-26",
+        "carried_over": false,
+        "identical_share": 0.009259259259259259,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-27",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-28",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-29",
+        "carried_over": false,
+        "identical_share": 0.02702702702702703,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-30",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-31",
+        "carried_over": true,
+        "identical_share": NaN,
+        "calendar_gap": true
+      },
+      {
+        "date": "2021-11-01",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      }
+    ]
+  },
+  "uncertainty": {
+    "method": "pooled_one_sided_CV_residual_quantile",
+    "nominal_coverage": 0.9,
+    "buffer": 29.526504516601562,
+    "retrospective_coverage": 0.9175738724727839,
+    "calibration_rows": 743,
+    "calibration_target_days": 7,
+    "mae_delta_vs_ma3_day_bootstrap_interval95": [
+      -31.328236996492024,
+      -10.974676457419863
+    ],
+    "warning": "empirical demand bound, not safety stock or guaranteed service level; CV selected the policy, so calibration coverage may be optimistic"
+  },
+  "quarantined_parts": [
+    "Part 21",
+    "Part 26"
+  ],
+  "model_names": [
+    "Last Value",
+    "3-day Moving Average",
+    "7-day Moving Average",
+    "D+3 Plan Reference",
+    "XGBoost",
+    "LightGBM",
+    "CatBoost",
+    "LSTM",
+    "Related LightGBM"
+  ],
+  "baseline_names": [
+    "Last Value",
+    "3-day Moving Average",
+    "7-day Moving Average",
+    "D+3 Plan Reference"
+  ],
+  "feature_contract": {
+    "recent_consecutive_days": 3,
+    "preferred_history_days": 8,
+    "features_basic": [
+      "actual_d_lag2",
+      "plan_d3_lag2",
+      "plan_d4_lag2",
+      "plan_d5_lag2",
+      "actual_d_lag1",
+      "plan_d3_lag1",
+      "plan_d4_lag1",
+      "plan_d5_lag1",
+      "actual_d_origin",
+      "plan_d3_origin",
+      "plan_d4_origin",
+      "plan_d5_origin",
+      "dow_sin",
+      "dow_cos",
+      "is_weekend",
+      "month"
+    ],
+    "features_extra": [
+      "actual_lag7",
+      "actual_mean7",
+      "actual_std7",
+      "history_count7",
+      "plan_revision1",
+      "plan_revision2",
+      "plan_revision_rate",
+      "actual_change1",
+      "actual_change2"
+    ],
+    "as_of": "after final daily snapshot",
+    "units": "count",
+    "target": "final ERP daily order-plan quantity"
+  },
+  "configurations": {
+    "XGBoost": {
+      "config": {
+        "features": "basic",
+        "size": "small"
+      },
+      "iterations": 429
+    },
+    "LightGBM": {
+      "config": {
+        "features": "basic",
+        "size": "medium"
+      },
+      "iterations": 105
+    },
+    "CatBoost": {
+      "config": {
+        "features": "enhanced",
+        "size": "medium"
+      },
+      "iterations": 204
+    },
+    "LSTM": {
+      "config": {
+        "features": "basic",
+        "size": "small"
+      },
+      "iterations": 61
+    },
+    "Related LightGBM": {
+      "config": {
+        "features": "enhanced",
+        "size": "medium"
+      },
+      "iterations": 115
+    }
+  },
+  "model": {
+    "feature_columns": [
+      "part_number",
+      "actual_d_lag2",
+      "plan_d3_lag2",
+      "plan_d4_lag2",
+      "plan_d5_lag2",
+      "actual_d_lag1",
+      "plan_d3_lag1",
+      "plan_d4_lag1",
+      "plan_d5_lag1",
+      "actual_d_origin",
+      "plan_d3_origin",
+      "plan_d4_origin",
+      "plan_d5_origin",
+      "dow_sin",
+      "dow_cos",
+      "is_weekend",
+      "month",
+      "actual_lag7",
+      "actual_mean7",
+      "actual_std7",
+      "history_count7",
+      "plan_revision1",
+      "plan_revision2",
+      "plan_revision_rate",
+      "actual_change1",
+      "actual_change2"
+    ],
+    "part_to_id": {
+      "Part 0": 0,
+      "Part 1": 1,
+      "Part 10": 2,
+      "Part 100": 3,
+      "Part 101": 4,
+      "Part 102": 5,
+      "Part 103": 6,
+      "Part 104": 7,
+      "Part 105": 8,
+      "Part 106": 9,
+      "Part 107": 10,
+      "Part 108": 11,
+      "Part 109": 12,
+      "Part 11": 13,
+      "Part 110": 14,
+      "Part 111": 15,
+      "Part 112": 16,
+      "Part 113": 17,
+      "Part 114": 18,
+      "Part 115": 19,
+      "Part 116": 20,
+      "Part 12": 21,
+      "Part 13": 22,
+      "Part 14": 23,
+      "Part 15": 24,
+      "Part 16": 25,
+      "Part 17": 26,
+      "Part 18": 27,
+      "Part 19": 28,
+      "Part 2": 29,
+      "Part 20": 30,
+      "Part 22": 31,
+      "Part 23": 32,
+      "Part 24": 33,
+      "Part 25": 34,
+      "Part 27": 35,
+      "Part 28": 36,
+      "Part 29": 37,
+      "Part 3": 38,
+      "Part 30": 39,
+      "Part 31": 40,
+      "Part 32": 41,
+      "Part 33": 42,
+      "Part 34": 43,
+      "Part 35": 44,
+      "Part 36": 45,
+      "Part 37": 46,
+      "Part 38": 47,
+      "Part 39": 48,
+      "Part 4": 49,
+      "Part 40": 50,
+      "Part 41": 51,
+      "Part 42": 52,
+      "Part 43": 53,
+      "Part 44": 54,
+      "Part 45": 55,
+      "Part 46": 56,
+      "Part 47": 57,
+      "Part 48": 58,
+      "Part 49": 59,
+      "Part 5": 60,
+      "Part 50": 61,
+      "Part 51": 62,
+      "Part 52": 63,
+      "Part 53": 64,
+      "Part 54": 65,
+      "Part 55": 66,
+      "Part 56": 67,
+      "Part 57": 68,
+      "Part 58": 69,
+      "Part 59": 70,
+      "Part 6": 71,
+      "Part 60": 72,
+      "Part 61": 73,
+      "Part 62": 74,
+      "Part 63": 75,
+      "Part 64": 76,
+      "Part 65": 77,
+      "Part 66": 78,
+      "Part 67": 79,
+      "Part 68": 80,
+      "Part 69": 81,
+      "Part 7": 82,
+      "Part 70": 83,
+      "Part 71": 84,
+      "Part 72": 85,
+      "Part 73": 86,
+      "Part 74": 87,
+      "Part 75": 88,
+      "Part 76": 89,
+      "Part 77": 90,
+      "Part 78": 91,
+      "Part 79": 92,
+      "Part 8": 93,
+      "Part 80": 94,
+      "Part 81": 95,
+      "Part 82": 96,
+      "Part 83": 97,
+      "Part 84": 98,
+      "Part 85": 99,
+      "Part 86": 100,
+      "Part 87": 101,
+      "Part 88": 102,
+      "Part 89": 103,
+      "Part 9": 104,
+      "Part 90": 105,
+      "Part 91": 106,
+      "Part 92": 107,
+      "Part 93": 108,
+      "Part 94": 109,
+      "Part 95": 110,
+      "Part 96": 111,
+      "Part 97": 112,
+      "Part 98": 113,
+      "Part 99": 114
+    }
+  }
+}

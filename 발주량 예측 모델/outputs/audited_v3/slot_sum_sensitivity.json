@@ -1,0 +1,369 @@
+{
+  "quantity": {
+    "source_rows": 17364,
+    "source_columns": 84,
+    "source_parts": 117,
+    "source_missing_cells": 0,
+    "quantity_source": "slot_sum",
+    "conflict_policy": "quarantine",
+    "quarantined_parts": [
+      "Part 21",
+      "Part 26"
+    ],
+    "conflicting_timestamp_groups": 306,
+    "conflict_rows": 612,
+    "daily_rows": 5380,
+    "daily_parts": 115,
+    "observed_dates": 49,
+    "total_slot_mismatch_rows": {
+      "actual_d": 31,
+      "plan_d1": 0,
+      "plan_d2": 0,
+      "plan_d3": 149,
+      "plan_d4": 136
+    },
+    "forecast_as_of": "after the final daily source snapshot; not an intraday forecast",
+    "target_definition": "final daily ERP order-plan quantity, not independently measured consumption",
+    "carryover_policy": "realign",
+    "carryover_identical_share_threshold": 0.9,
+    "carryover_dates": [
+      "2021-09-18",
+      "2021-09-19",
+      "2021-09-20",
+      "2021-09-21",
+      "2021-09-22",
+      "2021-09-23",
+      "2021-09-24",
+      "2021-09-25",
+      "2021-09-26",
+      "2021-10-03",
+      "2021-10-09",
+      "2021-10-10",
+      "2021-10-11",
+      "2021-10-17",
+      "2021-10-23",
+      "2021-10-24",
+      "2021-10-30",
+      "2021-10-31"
+    ],
+    "calendar_gap_dates": [
+      "2021-10-31"
+    ],
+    "label_days": 32,
+    "daily_rows_with_fill": 5488,
+    "carryover_flags": [
+      {
+        "date": "2021-09-13",
+        "carried_over": false,
+        "identical_share": NaN,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-14",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-15",
+        "carried_over": false,
+        "identical_share": 0.009433962264150943,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-16",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-17",
+        "carried_over": false,
+        "identical_share": 0.00909090909090909,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-18",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-19",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-20",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-21",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-22",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-23",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-24",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-25",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-26",
+        "carried_over": true,
+        "identical_share": 0.9818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-27",
+        "carried_over": false,
+        "identical_share": 0.01818181818181818,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-28",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-29",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-09-30",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-01",
+        "carried_over": false,
+        "identical_share": 0.026785714285714284,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-02",
+        "carried_over": false,
+        "identical_share": 0.008928571428571428,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-03",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-04",
+        "carried_over": false,
+        "identical_share": 0.008928571428571428,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-05",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-06",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-07",
+        "carried_over": false,
+        "identical_share": 0.008928571428571428,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-08",
+        "carried_over": false,
+        "identical_share": 0.03571428571428571,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-09",
+        "carried_over": true,
+        "identical_share": 0.9821428571428571,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-10",
+        "carried_over": true,
+        "identical_share": 0.9821428571428571,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-11",
+        "carried_over": true,
+        "identical_share": 0.9821428571428571,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-12",
+        "carried_over": false,
+        "identical_share": 0.017857142857142856,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-13",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-14",
+        "carried_over": false,
+        "identical_share": 0.00909090909090909,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-15",
+        "carried_over": false,
+        "identical_share": 0.03669724770642202,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-16",
+        "carried_over": false,
+        "identical_share": 0.037037037037037035,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-17",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-18",
+        "carried_over": false,
+        "identical_share": 0.009615384615384616,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-19",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-20",
+        "carried_over": false,
+        "identical_share": 0.018867924528301886,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-21",
+        "carried_over": false,
+        "identical_share": 0.009433962264150943,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-22",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-23",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-24",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-25",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-26",
+        "carried_over": false,
+        "identical_share": 0.009259259259259259,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-27",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-28",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-29",
+        "carried_over": false,
+        "identical_share": 0.02702702702702703,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-30",
+        "carried_over": true,
+        "identical_share": 1.0,
+        "calendar_gap": false
+      },
+      {
+        "date": "2021-10-31",
+        "carried_over": true,
+        "identical_share": NaN,
+        "calendar_gap": true
+      },
+      {
+        "date": "2021-11-01",
+        "carried_over": false,
+        "identical_share": 0.0,
+        "calendar_gap": false
+      }
+    ]
+  },
+  "selection": {
+    "overall_method": "XGBoost",
+    "ml_model": "XGBoost",
+    "overall_cv_mae": 15.840573743366779,
+    "ml_cv_mae": 15.840573743366779,
+    "selection_basis": "nested_purged_walk_forward_global_policy",
+    "final_holdout_is_selection_independent": false,
+    "evaluation_label": "retrospective_previously_observed_period",
+    "new_unseen_validation_available": false
+  },
+  "configurations": "source_total choices frozen; no second tuning",
+  "purpose": "target-definition sensitivity only; never choose target definition by smaller error"
+}

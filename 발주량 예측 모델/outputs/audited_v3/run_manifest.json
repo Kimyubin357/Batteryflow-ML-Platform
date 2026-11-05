@@ -1,0 +1,29 @@
+{
+  "version": "audited_v3",
+  "generated_at": "2026-11-05T01:43:13.495575+00:00",
+  "elapsed_seconds": 101.15897345542908,
+  "raw_sha256": "47ccb085cf062ad10df6b6b652e80f1cbe1423e4b1f2ac902771a727c0713229",
+  "code_sha256": {
+    "retrain_audited.py": "a94ef4b50e6c1a701b3a2d45b6b4b4a33aa9497bc3db7e98a0ebaf7ba8df5ed7",
+    "demand_contract.py": "e4d8b0ab15f4149dc135a790409771f87b00d8b3ee16da8cade71f3b05e170ab"
+  },
+  "python": "3.12.8",
+  "libraries": {
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "torch": "2.14.0+cpu",
+    "lightgbm": "4.7.0"
+  },
+  "selection": {
+    "overall_method": "XGBoost",
+    "ml_model": "XGBoost",
+    "overall_cv_mae": 15.940665909250844,
+    "ml_cv_mae": 15.940665909250844,
+    "selection_basis": "nested_purged_walk_forward_global_policy",
+    "final_holdout_is_selection_independent": false,
+    "evaluation_label": "retrospective_previously_observed_period",
+    "new_unseen_validation_available": false
+  },
+  "training_complete": true,
+  "firestore_uploaded": false
+}
